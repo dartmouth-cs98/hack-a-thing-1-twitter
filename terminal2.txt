@@ -1,0 +1,714 @@
+
+liverlevyorl@oliverlevyorl-Inspiron-3541:~/CS_Course/CS98$ python
+Python 2.7.12 (default, Aug 22 2019, 16:36:40) 
+[GCC 5.4.0 20160609] on linux2
+Type "help", "copyright", "credits" or "license" for more information.
+>>> import nltk
+>>> nltk.download('wordnet')
+[nltk_data] Downloading package wordnet to
+[nltk_data]     /home/oliverlevyorl/nltk_data...
+[nltk_data]   Unzipping corpora/wordnet.zip.
+True
+>>> from nltk.corpus import wordnet
+>>> wn.synset('car.01.n').lemma_names()
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+NameError: name 'wn' is not defined
+>>> wordnet.synset('car.01.n').lemma_names()
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+  File "/home/oliverlevyorl/.local/lib/python2.7/site-packages/nltk/corpus/reader/wordnet.py", line 1330, in synset
+    synset_index = int(synset_index_str) - 1
+ValueError: invalid literal for int() with base 10: 'n'
+>>> wordnet.synset('car.n.01').lemma_names()
+[u'car', u'auto', u'automobile', u'machine', u'motorcar']
+>>> nltk.download('austen-persuation.txt')
+[nltk_data] Error loading austen-persuation.txt: Package 'austen-
+[nltk_data]     persuation.txt' not found in index
+False
+>>> nltk.download('brown')
+[nltk_data] Downloading package brown to
+[nltk_data]     /home/oliverlevyorl/nltk_data...
+[nltk_data]   Package brown is already up-to-date!
+True
+>>> from nltk import brown
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+ImportError: cannot import name brown
+>>> from nltk.corpus import brown
+>>> brown.words('austen-persuation.txt')
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+  File "/home/oliverlevyorl/.local/lib/python2.7/site-packages/nltk/corpus/reader/tagged.py", line 271, in words
+    return TaggedCorpusReader.words(self, self._resolve(fileids, categories))
+  File "/home/oliverlevyorl/.local/lib/python2.7/site-packages/nltk/corpus/reader/tagged.py", line 101, in words
+    for (fileid, enc) in self.abspaths(fileids, True)
+  File "/home/oliverlevyorl/.local/lib/python2.7/site-packages/nltk/corpus/reader/api.py", line 193, in abspaths
+    paths = [self._root.join(f) for f in fileids]
+  File "/home/oliverlevyorl/.local/lib/python2.7/site-packages/nltk/data.py", line 355, in join
+    return FileSystemPathPointer(_path)
+  File "/home/oliverlevyorl/.local/lib/python2.7/site-packages/nltk/compat.py", line 228, in _decorator
+    return init_func(*args, **kwargs)
+  File "/home/oliverlevyorl/.local/lib/python2.7/site-packages/nltk/data.py", line 333, in __init__
+    raise IOError('No such file or directory: %r' % _path)
+IOError: No such file or directory: u'/home/oliverlevyorl/nltk_data/corpora/brown/austen-persuation.txt'
+>>> import re, pprint
+>>> from nltk import word_tokenize
+>>> print "********************************************************"
+********************************************************
+>>> print " FOR CHAPTER 3"
+ FOR CHAPTER 3
+>>> from urllib import request
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+ImportError: cannot import name request
+>>> from urllib import request
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+ImportError: cannot import name request
+>>> request.urlopen("http://www.gutenberg.org/files/2554/2554-0.txt")
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+NameError: name 'request' is not defined
+>>> import urllib
+>>> urllib.request.urlopen("http://www.gutenberg.org/files/2554/2554-0.txt")
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+AttributeError: 'module' object has no attribute 'request'
+>>> import requests
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+ImportError: No module named requests
+>>> urllib.urlopen("http://www.gutenberg.org/files/2554/2554-0.txt")
+<addinfourl at 139620540537096 whose fp = <socket._fileobject object at 0x7efbf104d850>>
+>>> response = urllib.urlopen("http://www.gutenberg.org/files/2554/2554-0.txt")
+>>> raw = response.read().decode('utf8')
+>>> type(raw)
+<type 'unicode'>
+>>> len(raw)
+1176967
+>>> raw[0:75]
+u'\ufeffThe Project Gutenberg EBook of Crime and Punishment, by Fyodor Dostoevsky\r'
+>>> tokens = word_tokenize(raw)
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+  File "/home/oliverlevyorl/.local/lib/python2.7/site-packages/nltk/tokenize/__init__.py", line 144, in word_tokenize
+    sentences = [text] if preserve_line else sent_tokenize(text, language)
+  File "/home/oliverlevyorl/.local/lib/python2.7/site-packages/nltk/tokenize/__init__.py", line 105, in sent_tokenize
+    tokenizer = load('tokenizers/punkt/{0}.pickle'.format(language))
+  File "/home/oliverlevyorl/.local/lib/python2.7/site-packages/nltk/data.py", line 868, in load
+    opened_resource = _open(resource_url)
+  File "/home/oliverlevyorl/.local/lib/python2.7/site-packages/nltk/data.py", line 993, in _open
+    return find(path_, path + ['']).open()
+  File "/home/oliverlevyorl/.local/lib/python2.7/site-packages/nltk/data.py", line 701, in find
+    raise LookupError(resource_not_found)
+LookupError: 
+**********************************************************************
+  Resource punkt not found.
+  Please use the NLTK Downloader to obtain the resource:
+
+  >>> import nltk
+  >>> nltk.download('punkt')
+  
+  For more information see: https://www.nltk.org/data.html
+
+  Attempted to load tokenizers/punkt/english.pickle
+
+  Searched in:
+    - '/home/oliverlevyorl/nltk_data'
+    - '/usr/nltk_data'
+    - '/usr/share/nltk_data'
+    - '/usr/lib/nltk_data'
+    - '/usr/share/nltk_data'
+    - '/usr/local/share/nltk_data'
+    - '/usr/lib/nltk_data'
+    - '/usr/local/lib/nltk_data'
+    - u''
+**********************************************************************
+
+>>> nltk.download('punkt')
+[nltk_data] Downloading package punkt to
+[nltk_data]     /home/oliverlevyorl/nltk_data...
+[nltk_data]   Unzipping tokenizers/punkt.zip.
+True
+>>> tokens = word_tokenize(raw)
+>>> type(toekns)
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+NameError: name 'toekns' is not defined
+>>> type(tokens)
+<type 'list'>
+>>> tokens[:20]
+[u'\ufeffThe', u'Project', u'Gutenberg', u'EBook', u'of', u'Crime', u'and', u'Punishment', u',', u'by', u'Fyodor', u'Dostoevsky', u'This', u'eBook', u'is', u'for', u'the', u'use', u'of', u'anyone']
+>>> tokens.collocations()
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+AttributeError: 'list' object has no attribute 'collocations'
+>>> text = nltk.Text(tokens)
+>>> type(text)
+<class 'nltk.text.Text'>
+>>> text.collocations()
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+  File "/home/oliverlevyorl/.local/lib/python2.7/site-packages/nltk/text.py", line 444, in collocations
+    w1 + " " + w2 for w1, w2 in self.collocation_list(num, window_size)
+  File "/home/oliverlevyorl/.local/lib/python2.7/site-packages/nltk/text.py", line 425, in collocation_list
+    ignored_words = stopwords.words("english")
+  File "/home/oliverlevyorl/.local/lib/python2.7/site-packages/nltk/corpus/util.py", line 123, in __getattr__
+    self.__load()
+  File "/home/oliverlevyorl/.local/lib/python2.7/site-packages/nltk/corpus/util.py", line 88, in __load
+    raise e
+LookupError: 
+**********************************************************************
+  Resource stopwords not found.
+  Please use the NLTK Downloader to obtain the resource:
+
+  >>> import nltk
+  >>> nltk.download('stopwords')
+  
+  For more information see: https://www.nltk.org/data.html
+
+  Attempted to load corpora/stopwords
+
+  Searched in:
+    - '/home/oliverlevyorl/nltk_data'
+    - '/usr/nltk_data'
+    - '/usr/share/nltk_data'
+    - '/usr/lib/nltk_data'
+    - '/usr/share/nltk_data'
+    - '/usr/local/share/nltk_data'
+    - '/usr/lib/nltk_data'
+    - '/usr/local/lib/nltk_data'
+**********************************************************************
+
+>>> nltk.download('stopwords')
+[nltk_data] Downloading package stopwords to
+[nltk_data]     /home/oliverlevyorl/nltk_data...
+[nltk_data]   Unzipping corpora/stopwords.zip.
+True
+>>> text.collocations()
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+  File "/home/oliverlevyorl/.local/lib/python2.7/site-packages/nltk/text.py", line 444, in collocations
+    w1 + " " + w2 for w1, w2 in self.collocation_list(num, window_size)
+ValueError: too many values to unpack
+>>> text.collocations()
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+  File "/home/oliverlevyorl/.local/lib/python2.7/site-packages/nltk/text.py", line 444, in collocations
+    w1 + " " + w2 for w1, w2 in self.collocation_list(num, window_size)
+ValueError: too many values to unpack
+>>>  url = "http://news.bbc.co.uk/2/hi/health/2284783.stm"
+  File "<stdin>", line 1
+    url = "http://news.bbc.co.uk/2/hi/health/2284783.stm"
+    ^
+IndentationError: unexpected indent
+>>> url = "http://news.bbc.co.uk/2/hi/health/2284783.stm"
+>>> html = urlopen(url).read().decode('utf8')
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+NameError: name 'urlopen' is not defined
+>>> html = urllib.urlopen(url).read().decode('utf8')
+>>> from bs4 import BeautifulSoup
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+ImportError: No module named bs4
+>>> import BeautifulSoup
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+ImportError: No module named BeautifulSoup
+>>> exit()
+oliverlevyorl@oliverlevyorl-Inspiron-3541:~/CS_Course/CS98$ pip install bs4
+Collecting bs4
+  Downloading https://files.pythonhosted.org/packages/10/ed/7e8b97591f6f456174139ec089c769f89a94a1a4025fe967691de971f314/bs4-0.0.1.tar.gz
+Collecting beautifulsoup4 (from bs4)
+  Downloading https://files.pythonhosted.org/packages/39/0e/cfae701dc1143409adf1dc78ebc138f7c507e342e5814b1ead2a727bc900/beautifulsoup4-4.8.0-py2-none-any.whl (97kB)
+    100% |████████████████████████████████| 102kB 787kB/s 
+Collecting soupsieve>=1.2 (from beautifulsoup4->bs4)
+  Downloading https://files.pythonhosted.org/packages/0b/44/0474f2207fdd601bb25787671c81076333d2c80e6f97e92790f8887cf682/soupsieve-1.9.3-py2.py3-none-any.whl
+Collecting backports.functools-lru-cache; python_version < "3" (from soupsieve>=1.2->beautifulsoup4->bs4)
+  Downloading https://files.pythonhosted.org/packages/03/8e/2424c0e65c4a066e28f539364deee49b6451f8fcd4f718fefa50cc3dcf48/backports.functools_lru_cache-1.5-py2.py3-none-any.whl
+Building wheels for collected packages: bs4
+  Running setup.py bdist_wheel for bs4 ... done
+  Stored in directory: /home/oliverlevyorl/.cache/pip/wheels/a0/b0/b2/4f80b9456b87abedbc0bf2d52235414c3467d8889be38dd472
+Successfully built bs4
+Installing collected packages: backports.functools-lru-cache, soupsieve, beautifulsoup4, bs4
+Successfully installed backports.functools-lru-cache-1.5 beautifulsoup4-4.8.0 bs4-0.0.1 soupsieve-1.9.3
+You are using pip version 8.1.1, however version 19.2.3 is available.
+You should consider upgrading via the 'pip install --upgrade pip' command.
+oliverlevyorl@oliverlevyorl-Inspiron-3541:~/CS_Course/CS98$ python
+Python 2.7.12 (default, Aug 22 2019, 16:36:40) 
+[GCC 5.4.0 20160609] on linux2
+Type "help", "copyright", "credits" or "license" for more information.
+>>> import nltk
+>>> from bs4 import Beautiful Soup
+  File "<stdin>", line 1
+    from bs4 import Beautiful Soup
+                                 ^
+SyntaxError: invalid syntax
+>>> from bs4 import BeautifulSoup
+>>> url = "http://news.bbc.co.uk/2/hi/health/2284783.stm"
+>>> html = urllib.urlopen(url).read().decode('utf8')
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+NameError: name 'urllib' is not defined
+>>> import urllib
+>>> html = urllib.urlopen(url).read().decode('utf8')
+>>> raw = BeautifulSoup(html,'html.parser').get_text()
+>>> tokens = word_tokenize(raw)
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+NameError: name 'word_tokenize' is not defined
+>>> import word_tokenize
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+ImportError: No module named word_tokenize
+>>> from nltk import punkt
+>>> tokens = word_tokenize(raw)
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+NameError: name 'word_tokenize' is not defined
+>>> nltk.download('punkt')
+[nltk_data] Downloading package punkt to
+[nltk_data]     /home/oliverlevyorl/nltk_data...
+[nltk_data]   Package punkt is already up-to-date!
+True
+>>> tokens = word_tokenize(raw)
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+NameError: name 'word_tokenize' is not defined
+>>> from nltk import word_tokenize
+>>> tokens = word_tokenize(raw)
+>>> tokens
+[u'BBC', u'NEWS', u'|', u'Health', u'|', u'Blondes', u"'to", u'die', u'out', u'in', u'200', u"years'", u'NEWS', u'SPORT', u'WEATHER', u'WORLD', u'SERVICE', u'A-Z', u'INDEX', u'SEARCH', u'You', u'are', u'in', u':', u'Health', u'News', u'Front', u'Page', u'Africa', u'Americas', u'Asia-Pacific', u'Europe', u'Middle', u'East', u'South', u'Asia', u'UK', u'Business', u'Entertainment', u'Science/Nature', u'Technology', u'Health', u'Medical', u'notes', u'--', u'--', u'--', u'--', u'--', u'--', u'-', u'Talking', u'Point', u'--', u'--', u'--', u'--', u'--', u'--', u'-', u'Country', u'Profiles', u'In', u'Depth', u'--', u'--', u'--', u'--', u'--', u'--', u'-', u'Programmes', u'--', u'--', u'--', u'--', u'--', u'--', u'-', u'SERVICES', u'Daily', u'E-mail', u'News', u'Ticker', u'Mobile/PDAs', u'--', u'--', u'--', u'--', u'--', u'--', u'-', u'Text', u'Only', u'Feedback', u'Help', u'EDITIONS', u'Change', u'to', u'UK', u'Friday', u',', u'27', u'September', u',', u'2002', u',', u'11:51', u'GMT', u'12:51', u'UK', u'Blondes', u"'to", u'die', u'out', u'in', u'200', u"years'", u'Scientists', u'believe', u'the', u'last', u'blondes', u'will', u'be', u'in', u'Finland', u'The', u'last', u'natural', u'blondes', u'will', u'die', u'out', u'within', u'200', u'years', u',', u'scientists', u'believe', u'.', u'A', u'study', u'by', u'experts', u'in', u'Germany', u'suggests', u'people', u'with', u'blonde', u'hair', u'are', u'an', u'endangered', u'species', u'and', u'will', u'become', u'extinct', u'by', u'2202', u'.', u'Researchers', u'predict', u'the', u'last', u'truly', u'natural', u'blonde', u'will', u'be', u'born', u'in', u'Finland', u'-', u'the', u'country', u'with', u'the', u'highest', u'proportion', u'of', u'blondes', u'.', u'The', u'frequency', u'of', u'blondes', u'may', u'drop', u'but', u'they', u'wo', u"n't", u'disappear', u'Prof', u'Jonathan', u'Rees', u',', u'University', u'of', u'Edinburgh', u'But', u'they', u'say', u'too', u'few', u'people', u'now', u'carry', u'the', u'gene', u'for', u'blondes', u'to', u'last', u'beyond', u'the', u'next', u'two', u'centuries', u'.', u'The', u'problem', u'is', u'that', u'blonde', u'hair', u'is', u'caused', u'by', u'a', u'recessive', u'gene', u'.', u'In', u'order', u'for', u'a', u'child', u'to', u'have', u'blonde', u'hair', u',', u'it', u'must', u'have', u'the', u'gene', u'on', u'both', u'sides', u'of', u'the', u'family', u'in', u'the', u'grandparents', u"'", u'generation', u'.', u'Dyed', u'rivals', u'The', u'researchers', u'also', u'believe', u'that', u'so-called', u'bottle', u'blondes', u'may', u'be', u'to', u'blame', u'for', u'the', u'demise', u'of', u'their', u'natural', u'rivals', u'.', u'They', u'suggest', u'that', u'dyed-blondes', u'are', u'more', u'attractive', u'to', u'men', u'who', u'choose', u'them', u'as', u'partners', u'over', u'true', u'blondes', u'.', u'Bottle-blondes', u'like', u'Ann', u'Widdecombe', u'may', u'be', u'to', u'blame', u'But', u'Jonathan', u'Rees', u',', u'professor', u'of', u'dermatology', u'at', u'the', u'University', u'of', u'Edinburgh', u'said', u'it', u'was', u'unlikely', u'blondes', u'would', u'die', u'out', u'completely', u'.', u'``', u'Genes', u'do', u"n't", u'die', u'out', u'unless', u'there', u'is', u'a', u'disadvantage', u'of', u'having', u'that', u'gene', u'or', u'by', u'chance', u'.', u'They', u'do', u"n't", u'disappear', u',', u"''", u'he', u'told', u'BBC', u'News', u'Online', u'.', u'``', u'The', u'only', u'reason', u'blondes', u'would', u'disappear', u'is', u'if', u'having', u'the', u'gene', u'was', u'a', u'disadvantage', u'and', u'I', u'do', u'not', u'think', u'that', u'is', u'the', u'case', u'.', u'``', u'The', u'frequency', u'of', u'blondes', u'may', u'drop', u'but', u'they', u'wo', u"n't", u'disappear', u'.', u"''", u'See', u'also', u':', u'28', u'Mar', u'01', u'|', u'Education', u'What', u'is', u'it', u'about', u'blondes', u'?', u'09', u'Apr', u'99', u'|', u'Health', u'Platinum', u'blondes', u'are', u'labelled', u'as', u'dumb', u'17', u'Apr', u'02', u'|', u'Health', u'Hair', u'dye', u'cancer', u'alert', u'Internet', u'links', u':', u'University', u'of', u'Edinburgh', u'The', u'BBC', u'is', u'not', u'responsible', u'for', u'the', u'content', u'of', u'external', u'internet', u'sites', u'Top', u'Health', u'stories', u'now', u':', u'Heart', u'risk', u'link', u'to', u'big', u'families', u'Back', u'pain', u'drug', u"'may", u'aid', u"diabetics'", u'Congo', u'Ebola', u'outbreak', u'confirmed', u'Vegetables', u'ward', u'off', u"Alzheimer's", u'Polio', u'campaign', u'launched', u'in', u'Iraq', u'Gene', u'defect', u'explains', u'high', u'blood', u'pressure', u'Botox', u"'may", u'cause', u'new', u"wrinkles'", u'Alien', u"'abductees", u"'", u'show', u'real', u'symptoms', u'Links', u'to', u'more', u'Health', u'stories', u'are', u'at', u'the', u'foot', u'of', u'the', u'page', u'.', u'E-mail', u'this', u'story', u'to', u'a', u'friend', u'Links', u'to', u'more', u'Health', u'stories', u'In', u'This', u'Section', u'Heart', u'risk', u'link', u'to', u'big', u'families', u'Back', u'pain', u'drug', u"'may", u'aid', u"diabetics'", u'Congo', u'Ebola', u'outbreak', u'confirmed', u'Vegetables', u'ward', u'off', u"Alzheimer's", u'Polio', u'campaign', u'launched', u'in', u'Iraq', u'Gene', u'defect', u'explains', u'high', u'blood', u'pressure', u'Botox', u"'may", u'cause', u'new', u"wrinkles'", u'Alien', u"'abductees", u"'", u'show', u'real', u'symptoms', u'How', u'sperm', u'wriggle', u'Bollywood', u'told', u'to', u'stub', u'it', u'out', u'Fears', u'over', u'tuna', u'health', u'risk', u'to', u'babies', u'Public', u'can', u'be', u'taught', u'to', u'spot', u'strokes', u'^^', u'Back', u'to', u'top', u'News', u'Front', u'Page', u'|', u'Africa', u'|', u'Americas', u'|', u'Asia-Pacific', u'|', u'Europe', u'|', u'Middle', u'East', u'|', u'South', u'Asia', u'|', u'UK', u'|', u'Business', u'|', u'Entertainment', u'|', u'Science/Nature', u'|', u'Technology', u'|', u'Health', u'|', u'Talking', u'Point', u'|', u'Country', u'Profiles', u'|', u'In', u'Depth', u'|', u'Programmes', u'--', u'--', u'--', u'--', u'--', u'--', u'--', u'--', u'--', u'--', u'--', u'--', u'--', u'--', u'--', u'--', u'--', u'--', u'--', u'--', u'--', u'--', u'--', u'--', u'--', u'--', u'--', u'--', u'--', u'--', u'--', u'--', u'--', u'--', u'--', u'--', u'--', u'--', u'--', u'--', u'--', u'To', u'BBC', u'Sport', u'>', u'>', u'|', u'To', u'BBC', u'Weather', u'>', u'>', u'|', u'To', u'BBC', u'World', u'Service', u'>', u'>', u'--', u'--', u'--', u'--', u'--', u'--', u'--', u'--', u'--', u'--', u'--', u'--', u'--', u'--', u'--', u'--', u'--', u'--', u'--', u'--', u'--', u'--', u'--', u'--', u'--', u'--', u'--', u'--', u'--', u'--', u'--', u'--', u'--', u'--', u'--', u'--', u'--', u'--', u'--', u'--', u'--', u'\xa9', u'MMIII', u'|', u'News', u'Sources', u'|', u'Privacy', u'<', u'!', u'--', u'var', u'pCid=', u"''", u'uk_bbc_0', u"''", u';', u'var', u'w0=1', u';', u'var', u'refR=escape', u'(', u'document.referrer', u')', u';', u'if', u'(', u'refR.length', u'>', u'=252', u')', u'refR=refR.substring', u'(', u'0,252', u')', u'+', u"''", u'...', u"''", u';', u'//', u'--', u'>', u'<', u'!', u'--', u'var', u'w0=0', u';', u'//', u'--', u'>', u'<', u'!', u'--', u'if', u'(', u'w0', u')', u'{', u'var', u'imgN=', u"'", u'<', u'img', u'src=', u"''", u'http', u':', u'//server-uk.imrworldwide.com/cgi-bin/count', u'?', u"ref='+", u'refR+', u"'", u'&', u"cid='+pCid+", u"'", u"''", u'width=1', u'height=1', u'>', u"'", u';', u'if', u'(', u'navigator.userAgent.indexOf', u'(', u"'Mac", u"'", u')', u'!', u'=-1', u')', u'{', u'document.write', u'(', u'imgN', u')', u';', u'}', u'else', u'{', u'document.write', u'(', u"'", u'<', u'applet', u'code=', u"''", u'Measure.class', u"''", u"'+", u"'codebase=", u"''", u'http', u':', u'//server-uk.imrworldwide.com/', u"''", u"'+'width=1", u'height=2', u'>', u"'+", u"'", u'<', u'param', u'name=', u"''", u'ref', u"''", u'value=', u"''", u"'+refR+", u"'", u"''", u'>', u"'+", u"'", u'<', u'param', u'name=', u"''", u'cid', u"''", u'value=', u"''", u"'+pCid+", u"'", u"''", u'>', u'<', u'textflow', u'>', u"'+imgN+", u"'", u'<', u'/textflow', u'>', u'<', u'/applet', u'>', u"'", u')', u';', u'}', u'}', u'document.write', u'(', u'``', u'<', u'COMMENT', u'>', u"''", u')', u';', u'//', u'--', u'>', u'var', u'si', u'=', u'document.location+', u"''", u"''", u';', u'var', u'tsi', u'=', u'si.replace', u'(', u'``', u'.stm', u"''", u',', u"''", u"''", u')', u'.substr', u'(', u'si.length-11', u',', u'si.length', u')', u';', u'if', u'(', u'!', u'tsi.match', u'(', u'/\\d\\d\\d\\d\\d\\d\\d/', u')', u')', u'{', u'tsi', u'=', u'0', u';', u'}', u'document.write', u'(', u"'", u'<', u'img', u'src=', u"''", u'http', u':', u'//stats.bbc.co.uk/o.gif', u'?', u'~RS~s~RS~News~RS~t~RS~HighWeb_Legacy~RS~i~RS~', u"'", u'+', u'tsi', u'+', u"'~RS~p~RS~0~RS~u~RS~/2/hi/health/2284783.stm~RS~r~RS~", u'(', u'none', u')', u'~RS~a~RS~International~RS~q~RS~~RS~z~RS~58~RS~', u"''", u'>', u"'", u')', u';']
+>>> tokens = tokens[110:390]
+>>> text = nltk.Text(tokens)
+>>> text.concordance('gene')
+Displaying 5 of 5 matches:
+hey say too few people now carry the gene for blondes to last beyond the next 
+blonde hair is caused by a recessive gene . In order for a child to have blond
+ have blonde hair , it must have the gene on both sides of the family in the g
+ere is a disadvantage of having that gene or by chance . They do n't disappear
+des would disappear is if having the gene was a disadvantage and I do not thin
+>>> path = nltk.data.find('corpora/unicode_samples/polish-lat2.txt')
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+  File "/home/oliverlevyorl/.local/lib/python2.7/site-packages/nltk/data.py", line 701, in find
+    raise LookupError(resource_not_found)
+LookupError: 
+**********************************************************************
+  Resource unicode_samples not found.
+  Please use the NLTK Downloader to obtain the resource:
+
+  >>> import nltk
+  >>> nltk.download('unicode_samples')
+  
+  For more information see: https://www.nltk.org/data.html
+
+  Attempted to load corpora/unicode_samples/polish-lat2.txt
+
+  Searched in:
+    - '/home/oliverlevyorl/nltk_data'
+    - '/usr/nltk_data'
+    - '/usr/share/nltk_data'
+    - '/usr/lib/nltk_data'
+    - '/usr/share/nltk_data'
+    - '/usr/local/share/nltk_data'
+    - '/usr/lib/nltk_data'
+    - '/usr/local/lib/nltk_data'
+**********************************************************************
+
+>>> nltk.download('unicode_samples')
+[nltk_data] Downloading package unicode_samples to
+[nltk_data]     /home/oliverlevyorl/nltk_data...
+[nltk_data]   Unzipping corpora/unicode_samples.zip.
+True
+>>> path = nltk.data.find('corpora/unicode_samples/polish-lat2.txt')
+>>> f= open(path, encoding='latin2')
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+TypeError: 'encoding' is an invalid keyword argument for this function
+>>> f= open(path)
+>>> for line in f:
+...     line = line.strip()
+...     print(line)
+... 
+Pruska Biblioteka Pa�stwowa. Jej dawne zbiory znane pod nazw�
+"Berlinka" to skarb kultury i sztuki niemieckiej. Przewiezione przez
+Niemc�w pod koniec II wojny �wiatowej na Dolny �l�sk, zosta�y
+odnalezione po 1945 r. na terytorium Polski. Trafi�y do Biblioteki
+Jagiello�skiej w Krakowie, obejmuj� ponad 500 tys. zabytkowych
+archiwali�w, m.in. manuskrypty Goethego, Mozarta, Beethovena, Bacha.
+>>> for line in f:
+...     line = line.strip()
+...     print(line.encode('unicode_escape'))
+... 
+>>> f= open(path)
+>>> for line in f:
+...     line = line.strip()
+...     print(line.encode('unicode_escape'))
+... 
+Traceback (most recent call last):
+  File "<stdin>", line 3, in <module>
+UnicodeDecodeError: 'ascii' codec can't decode byte 0xf1 in position 20: ordinal not in range(128)
+>>> nacute = '\u0144'
+>>> nacute
+'\\u0144'
+>>> 
+oliverlevyorl@oliverlevyorl-Inspiron-3541:~/CS_Course/CS98$ python
+Python 2.7.12 (default, Aug 22 2019, 16:36:40) 
+[GCC 5.4.0 20160609] on linux2
+Type "help", "copyright", "credits" or "license" for more information.
+>>> import nltk
+>>> nltk.download('wordnet')
+[nltk_data] Downloading package wordnet to
+[nltk_data]     /home/oliverlevyorl/nltk_data...
+[nltk_data]   Unzipping corpora/wordnet.zip.
+True
+>>> from nltk.corpus import wordnet
+>>> wn.synset('car.01.n').lemma_names()
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+NameError: name 'wn' is not defined
+>>> wordnet.synset('car.01.n').lemma_names()
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+  File "/home/oliverlevyorl/.local/lib/python2.7/site-packages/nltk/corpus/reader/wordnet.py", line 1330, in synset
+    synset_index = int(synset_index_str) - 1
+ValueError: invalid literal for int() with base 10: 'n'
+>>> wordnet.synset('car.n.01').lemma_names()
+[u'car', u'auto', u'automobile', u'machine', u'motorcar']
+>>> nltk.download('austen-persuation.txt')
+[nltk_data] Error loading austen-persuation.txt: Package 'austen-
+[nltk_data]     persuation.txt' not found in index
+False
+>>> nltk.download('brown')
+[nltk_data] Downloading package brown to
+[nltk_data]     /home/oliverlevyorl/nltk_data...
+[nltk_data]   Package brown is already up-to-date!
+True
+>>> from nltk import brown
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+ImportError: cannot import name brown
+>>> from nltk.corpus import brown
+>>> brown.words('austen-persuation.txt')
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+  File "/home/oliverlevyorl/.local/lib/python2.7/site-packages/nltk/corpus/reader/tagged.py", line 271, in words
+    return TaggedCorpusReader.words(self, self._resolve(fileids, categories))
+  File "/home/oliverlevyorl/.local/lib/python2.7/site-packages/nltk/corpus/reader/tagged.py", line 101, in words
+    for (fileid, enc) in self.abspaths(fileids, True)
+  File "/home/oliverlevyorl/.local/lib/python2.7/site-packages/nltk/corpus/reader/api.py", line 193, in abspaths
+    paths = [self._root.join(f) for f in fileids]
+  File "/home/oliverlevyorl/.local/lib/python2.7/site-packages/nltk/data.py", line 355, in join
+    return FileSystemPathPointer(_path)
+  File "/home/oliverlevyorl/.local/lib/python2.7/site-packages/nltk/compat.py", line 228, in _decorator
+    return init_func(*args, **kwargs)
+  File "/home/oliverlevyorl/.local/lib/python2.7/site-packages/nltk/data.py", line 333, in __init__
+    raise IOError('No such file or directory: %r' % _path)
+IOError: No such file or directory: u'/home/oliverlevyorl/nltk_data/corpora/brown/austen-persuation.txt'
+>>> import re, pprint
+>>> from nltk import word_tokenize
+>>> print "********************************************************"
+********************************************************
+>>> print " FOR CHAPTER 3"
+ FOR CHAPTER 3
+>>> from urllib import request
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+ImportError: cannot import name request
+>>> from urllib import request
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+ImportError: cannot import name request
+>>> request.urlopen("http://www.gutenberg.org/files/2554/2554-0.txt")
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+NameError: name 'request' is not defined
+>>> import urllib
+>>> urllib.request.urlopen("http://www.gutenberg.org/files/2554/2554-0.txt")
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+AttributeError: 'module' object has no attribute 'request'
+>>> import requests
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+ImportError: No module named requests
+>>> urllib.urlopen("http://www.gutenberg.org/files/2554/2554-0.txt")
+<addinfourl at 139620540537096 whose fp = <socket._fileobject object at 0x7efbf104d850>>
+>>> response = urllib.urlopen("http://www.gutenberg.org/files/2554/2554-0.txt")
+>>> raw = response.read().decode('utf8')
+>>> type(raw)
+<type 'unicode'>
+>>> len(raw)
+1176967
+>>> raw[0:75]
+u'\ufeffThe Project Gutenberg EBook of Crime and Punishment, by Fyodor Dostoevsky\r'
+>>> tokens = word_tokenize(raw)
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+  File "/home/oliverlevyorl/.local/lib/python2.7/site-packages/nltk/tokenize/__init__.py", line 144, in word_tokenize
+    sentences = [text] if preserve_line else sent_tokenize(text, language)
+  File "/home/oliverlevyorl/.local/lib/python2.7/site-packages/nltk/tokenize/__init__.py", line 105, in sent_tokenize
+    tokenizer = load('tokenizers/punkt/{0}.pickle'.format(language))
+  File "/home/oliverlevyorl/.local/lib/python2.7/site-packages/nltk/data.py", line 868, in load
+    opened_resource = _open(resource_url)
+  File "/home/oliverlevyorl/.local/lib/python2.7/site-packages/nltk/data.py", line 993, in _open
+    return find(path_, path + ['']).open()
+  File "/home/oliverlevyorl/.local/lib/python2.7/site-packages/nltk/data.py", line 701, in find
+    raise LookupError(resource_not_found)
+LookupError: 
+**********************************************************************
+  Resource punkt not found.
+  Please use the NLTK Downloader to obtain the resource:
+
+  >>> import nltk
+  >>> nltk.download('punkt')
+  
+  For more information see: https://www.nltk.org/data.html
+
+  Attempted to load tokenizers/punkt/english.pickle
+
+  Searched in:
+    - '/home/oliverlevyorl/nltk_data'
+    - '/usr/nltk_data'
+    - '/usr/share/nltk_data'
+    - '/usr/lib/nltk_data'
+    - '/usr/share/nltk_data'
+    - '/usr/local/share/nltk_data'
+    - '/usr/lib/nltk_data'
+    - '/usr/local/lib/nltk_data'
+    - u''
+**********************************************************************
+
+>>> nltk.download('punkt')
+[nltk_data] Downloading package punkt to
+[nltk_data]     /home/oliverlevyorl/nltk_data...
+[nltk_data]   Unzipping tokenizers/punkt.zip.
+True
+>>> tokens = word_tokenize(raw)
+>>> type(toekns)
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+NameError: name 'toekns' is not defined
+>>> type(tokens)
+<type 'list'>
+>>> tokens[:20]
+[u'\ufeffThe', u'Project', u'Gutenberg', u'EBook', u'of', u'Crime', u'and', u'Punishment', u',', u'by', u'Fyodor', u'Dostoevsky', u'This', u'eBook', u'is', u'for', u'the', u'use', u'of', u'anyone']
+>>> tokens.collocations()
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+AttributeError: 'list' object has no attribute 'collocations'
+>>> text = nltk.Text(tokens)
+>>> type(text)
+<class 'nltk.text.Text'>
+>>> text.collocations()
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+  File "/home/oliverlevyorl/.local/lib/python2.7/site-packages/nltk/text.py", line 444, in collocations
+    w1 + " " + w2 for w1, w2 in self.collocation_list(num, window_size)
+  File "/home/oliverlevyorl/.local/lib/python2.7/site-packages/nltk/text.py", line 425, in collocation_list
+    ignored_words = stopwords.words("english")
+  File "/home/oliverlevyorl/.local/lib/python2.7/site-packages/nltk/corpus/util.py", line 123, in __getattr__
+    self.__load()
+  File "/home/oliverlevyorl/.local/lib/python2.7/site-packages/nltk/corpus/util.py", line 88, in __load
+    raise e
+LookupError: 
+**********************************************************************
+  Resource stopwords not found.
+  Please use the NLTK Downloader to obtain the resource:
+
+  >>> import nltk
+  >>> nltk.download('stopwords')
+  
+  For more information see: https://www.nltk.org/data.html
+
+  Attempted to load corpora/stopwords
+
+  Searched in:
+    - '/home/oliverlevyorl/nltk_data'
+    - '/usr/nltk_data'
+    - '/usr/share/nltk_data'
+    - '/usr/lib/nltk_data'
+    - '/usr/share/nltk_data'
+    - '/usr/local/share/nltk_data'
+    - '/usr/lib/nltk_data'
+    - '/usr/local/lib/nltk_data'
+**********************************************************************
+
+>>> nltk.download('stopwords')
+[nltk_data] Downloading package stopwords to
+[nltk_data]     /home/oliverlevyorl/nltk_data...
+[nltk_data]   Unzipping corpora/stopwords.zip.
+True
+>>> text.collocations()
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+  File "/home/oliverlevyorl/.local/lib/python2.7/site-packages/nltk/text.py", line 444, in collocations
+    w1 + " " + w2 for w1, w2 in self.collocation_list(num, window_size)
+ValueError: too many values to unpack
+>>> text.collocations()
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+  File "/home/oliverlevyorl/.local/lib/python2.7/site-packages/nltk/text.py", line 444, in collocations
+    w1 + " " + w2 for w1, w2 in self.collocation_list(num, window_size)
+ValueError: too many values to unpack
+>>>  url = "http://news.bbc.co.uk/2/hi/health/2284783.stm"
+  File "<stdin>", line 1
+    url = "http://news.bbc.co.uk/2/hi/health/2284783.stm"
+    ^
+IndentationError: unexpected indent
+>>> url = "http://news.bbc.co.uk/2/hi/health/2284783.stm"
+>>> html = urlopen(url).read().decode('utf8')
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+NameError: name 'urlopen' is not defined
+>>> html = urllib.urlopen(url).read().decode('utf8')
+>>> from bs4 import BeautifulSoup
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+ImportError: No module named bs4
+>>> import BeautifulSoup
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+ImportError: No module named BeautifulSoup
+>>> exit()
+oliverlevyorl@oliverlevyorl-Inspiron-3541:~/CS_Course/CS98$ pip install bs4
+Collecting bs4
+  Downloading https://files.pythonhosted.org/packages/10/ed/7e8b97591f6f456174139ec089c769f89a94a1a4025fe967691de971f314/bs4-0.0.1.tar.gz
+Collecting beautifulsoup4 (from bs4)
+  Downloading https://files.pythonhosted.org/packages/39/0e/cfae701dc1143409adf1dc78ebc138f7c507e342e5814b1ead2a727bc900/beautifulsoup4-4.8.0-py2-none-any.whl (97kB)
+    100% |████████████████████████████████| 102kB 787kB/s 
+Collecting soupsieve>=1.2 (from beautifulsoup4->bs4)
+  Downloading https://files.pythonhosted.org/packages/0b/44/0474f2207fdd601bb25787671c81076333d2c80e6f97e92790f8887cf682/soupsieve-1.9.3-py2.py3-none-any.whl
+Collecting backports.functools-lru-cache; python_version < "3" (from soupsieve>=1.2->beautifulsoup4->bs4)
+  Downloading https://files.pythonhosted.org/packages/03/8e/2424c0e65c4a066e28f539364deee49b6451f8fcd4f718fefa50cc3dcf48/backports.functools_lru_cache-1.5-py2.py3-none-any.whl
+Building wheels for collected packages: bs4
+  Running setup.py bdist_wheel for bs4 ... done
+  Stored in directory: /home/oliverlevyorl/.cache/pip/wheels/a0/b0/b2/4f80b9456b87abedbc0bf2d52235414c3467d8889be38dd472
+Successfully built bs4
+Installing collected packages: backports.functools-lru-cache, soupsieve, beautifulsoup4, bs4
+Successfully installed backports.functools-lru-cache-1.5 beautifulsoup4-4.8.0 bs4-0.0.1 soupsieve-1.9.3
+You are using pip version 8.1.1, however version 19.2.3 is available.
+You should consider upgrading via the 'pip install --upgrade pip' command.
+oliverlevyorl@oliverlevyorl-Inspiron-3541:~/CS_Course/CS98$ python
+Python 2.7.12 (default, Aug 22 2019, 16:36:40) 
+[GCC 5.4.0 20160609] on linux2
+Type "help", "copyright", "credits" or "license" for more information.
+>>> import nltk
+>>> from bs4 import Beautiful Soup
+  File "<stdin>", line 1
+    from bs4 import Beautiful Soup
+                                 ^
+SyntaxError: invalid syntax
+>>> from bs4 import BeautifulSoup
+>>> url = "http://news.bbc.co.uk/2/hi/health/2284783.stm"
+>>> html = urllib.urlopen(url).read().decode('utf8')
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+NameError: name 'urllib' is not defined
+>>> import urllib
+>>> html = urllib.urlopen(url).read().decode('utf8')
+>>> raw = BeautifulSoup(html,'html.parser').get_text()
+>>> tokens = word_tokenize(raw)
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+NameError: name 'word_tokenize' is not defined
+>>> import word_tokenize
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+ImportError: No module named word_tokenize
+>>> from nltk import punkt
+>>> tokens = word_tokenize(raw)
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+NameError: name 'word_tokenize' is not defined
+>>> nltk.download('punkt')
+[nltk_data] Downloading package punkt to
+[nltk_data]     /home/oliverlevyorl/nltk_data...
+[nltk_data]   Package punkt is already up-to-date!
+True
+>>> tokens = word_tokenize(raw)
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+NameError: name 'word_tokenize' is not defined
+>>> from nltk import word_tokenize
+>>> tokens = word_tokenize(raw)
+>>> tokens
+[u'BBC', u'NEWS', u'|', u'Health', u'|', u'Blondes', u"'to", u'die', u'out', u'in', u'200', u"years'", u'NEWS', u'SPORT', u'WEATHER', u'WORLD', u'SERVICE', u'A-Z', u'INDEX', u'SEARCH', u'You', u'are', u'in', u':', u'Health', u'News', u'Front', u'Page', u'Africa', u'Americas', u'Asia-Pacific', u'Europe', u'Middle', u'East', u'South', u'Asia', u'UK', u'Business', u'Entertainment', u'Science/Nature', u'Technology', u'Health', u'Medical', u'notes', u'--', u'--', u'--', u'--', u'--', u'--', u'-', u'Talking', u'Point', u'--', u'--', u'--', u'--', u'--', u'--', u'-', u'Country', u'Profiles', u'In', u'Depth', u'--', u'--', u'--', u'--', u'--', u'--', u'-', u'Programmes', u'--', u'--', u'--', u'--', u'--', u'--', u'-', u'SERVICES', u'Daily', u'E-mail', u'News', u'Ticker', u'Mobile/PDAs', u'--', u'--', u'--', u'--', u'--', u'--', u'-', u'Text', u'Only', u'Feedback', u'Help', u'EDITIONS', u'Change', u'to', u'UK', u'Friday', u',', u'27', u'September', u',', u'2002', u',', u'11:51', u'GMT', u'12:51', u'UK', u'Blondes', u"'to", u'die', u'out', u'in', u'200', u"years'", u'Scientists', u'believe', u'the', u'last', u'blondes', u'will', u'be', u'in', u'Finland', u'The', u'last', u'natural', u'blondes', u'will', u'die', u'out', u'within', u'200', u'years', u',', u'scientists', u'believe', u'.', u'A', u'study', u'by', u'experts', u'in', u'Germany', u'suggests', u'people', u'with', u'blonde', u'hair', u'are', u'an', u'endangered', u'species', u'and', u'will', u'become', u'extinct', u'by', u'2202', u'.', u'Researchers', u'predict', u'the', u'last', u'truly', u'natural', u'blonde', u'will', u'be', u'born', u'in', u'Finland', u'-', u'the', u'country', u'with', u'the', u'highest', u'proportion', u'of', u'blondes', u'.', u'The', u'frequency', u'of', u'blondes', u'may', u'drop', u'but', u'they', u'wo', u"n't", u'disappear', u'Prof', u'Jonathan', u'Rees', u',', u'University', u'of', u'Edinburgh', u'But', u'they', u'say', u'too', u'few', u'people', u'now', u'carry', u'the', u'gene', u'for', u'blondes', u'to', u'last', u'beyond', u'the', u'next', u'two', u'centuries', u'.', u'The', u'problem', u'is', u'that', u'blonde', u'hair', u'is', u'caused', u'by', u'a', u'recessive', u'gene', u'.', u'In', u'order', u'for', u'a', u'child', u'to', u'have', u'blonde', u'hair', u',', u'it', u'must', u'have', u'the', u'gene', u'on', u'both', u'sides', u'of', u'the', u'family', u'in', u'the', u'grandparents', u"'", u'generation', u'.', u'Dyed', u'rivals', u'The', u'researchers', u'also', u'believe', u'that', u'so-called', u'bottle', u'blondes', u'may', u'be', u'to', u'blame', u'for', u'the', u'demise', u'of', u'their', u'natural', u'rivals', u'.', u'They', u'suggest', u'that', u'dyed-blondes', u'are', u'more', u'attractive', u'to', u'men', u'who', u'choose', u'them', u'as', u'partners', u'over', u'true', u'blondes', u'.', u'Bottle-blondes', u'like', u'Ann', u'Widdecombe', u'may', u'be', u'to', u'blame', u'But', u'Jonathan', u'Rees', u',', u'professor', u'of', u'dermatology', u'at', u'the', u'University', u'of', u'Edinburgh', u'said', u'it', u'was', u'unlikely', u'blondes', u'would', u'die', u'out', u'completely', u'.', u'``', u'Genes', u'do', u"n't", u'die', u'out', u'unless', u'there', u'is', u'a', u'disadvantage', u'of', u'having', u'that', u'gene', u'or', u'by', u'chance', u'.', u'They', u'do', u"n't", u'disappear', u',', u"''", u'he', u'told', u'BBC', u'News', u'Online', u'.', u'``', u'The', u'only', u'reason', u'blondes', u'would', u'disappear', u'is', u'if', u'having', u'the', u'gene', u'was', u'a', u'disadvantage', u'and', u'I', u'do', u'not', u'think', u'that', u'is', u'the', u'case', u'.', u'``', u'The', u'frequency', u'of', u'blondes', u'may', u'drop', u'but', u'they', u'wo', u"n't", u'disappear', u'.', u"''", u'See', u'also', u':', u'28', u'Mar', u'01', u'|', u'Education', u'What', u'is', u'it', u'about', u'blondes', u'?', u'09', u'Apr', u'99', u'|', u'Health', u'Platinum', u'blondes', u'are', u'labelled', u'as', u'dumb', u'17', u'Apr', u'02', u'|', u'Health', u'Hair', u'dye', u'cancer', u'alert', u'Internet', u'links', u':', u'University', u'of', u'Edinburgh', u'The', u'BBC', u'is', u'not', u'responsible', u'for', u'the', u'content', u'of', u'external', u'internet', u'sites', u'Top', u'Health', u'stories', u'now', u':', u'Heart', u'risk', u'link', u'to', u'big', u'families', u'Back', u'pain', u'drug', u"'may", u'aid', u"diabetics'", u'Congo', u'Ebola', u'outbreak', u'confirmed', u'Vegetables', u'ward', u'off', u"Alzheimer's", u'Polio', u'campaign', u'launched', u'in', u'Iraq', u'Gene', u'defect', u'explains', u'high', u'blood', u'pressure', u'Botox', u"'may", u'cause', u'new', u"wrinkles'", u'Alien', u"'abductees", u"'", u'show', u'real', u'symptoms', u'Links', u'to', u'more', u'Health', u'stories', u'are', u'at', u'the', u'foot', u'of', u'the', u'page', u'.', u'E-mail', u'this', u'story', u'to', u'a', u'friend', u'Links', u'to', u'more', u'Health', u'stories', u'In', u'This', u'Section', u'Heart', u'risk', u'link', u'to', u'big', u'families', u'Back', u'pain', u'drug', u"'may", u'aid', u"diabetics'", u'Congo', u'Ebola', u'outbreak', u'confirmed', u'Vegetables', u'ward', u'off', u"Alzheimer's", u'Polio', u'campaign', u'launched', u'in', u'Iraq', u'Gene', u'defect', u'explains', u'high', u'blood', u'pressure', u'Botox', u"'may", u'cause', u'new', u"wrinkles'", u'Alien', u"'abductees", u"'", u'show', u'real', u'symptoms', u'How', u'sperm', u'wriggle', u'Bollywood', u'told', u'to', u'stub', u'it', u'out', u'Fears', u'over', u'tuna', u'health', u'risk', u'to', u'babies', u'Public', u'can', u'be', u'taught', u'to', u'spot', u'strokes', u'^^', u'Back', u'to', u'top', u'News', u'Front', u'Page', u'|', u'Africa', u'|', u'Americas', u'|', u'Asia-Pacific', u'|', u'Europe', u'|', u'Middle', u'East', u'|', u'South', u'Asia', u'|', u'UK', u'|', u'Business', u'|', u'Entertainment', u'|', u'Science/Nature', u'|', u'Technology', u'|', u'Health', u'|', u'Talking', u'Point', u'|', u'Country', u'Profiles', u'|', u'In', u'Depth', u'|', u'Programmes', u'--', u'--', u'--', u'--', u'--', u'--', u'--', u'--', u'--', u'--', u'--', u'--', u'--', u'--', u'--', u'--', u'--', u'--', u'--', u'--', u'--', u'--', u'--', u'--', u'--', u'--', u'--', u'--', u'--', u'--', u'--', u'--', u'--', u'--', u'--', u'--', u'--', u'--', u'--', u'--', u'--', u'To', u'BBC', u'Sport', u'>', u'>', u'|', u'To', u'BBC', u'Weather', u'>', u'>', u'|', u'To', u'BBC', u'World', u'Service', u'>', u'>', u'--', u'--', u'--', u'--', u'--', u'--', u'--', u'--', u'--', u'--', u'--', u'--', u'--', u'--', u'--', u'--', u'--', u'--', u'--', u'--', u'--', u'--', u'--', u'--', u'--', u'--', u'--', u'--', u'--', u'--', u'--', u'--', u'--', u'--', u'--', u'--', u'--', u'--', u'--', u'--', u'--', u'\xa9', u'MMIII', u'|', u'News', u'Sources', u'|', u'Privacy', u'<', u'!', u'--', u'var', u'pCid=', u"''", u'uk_bbc_0', u"''", u';', u'var', u'w0=1', u';', u'var', u'refR=escape', u'(', u'document.referrer', u')', u';', u'if', u'(', u'refR.length', u'>', u'=252', u')', u'refR=refR.substring', u'(', u'0,252', u')', u'+', u"''", u'...', u"''", u';', u'//', u'--', u'>', u'<', u'!', u'--', u'var', u'w0=0', u';', u'//', u'--', u'>', u'<', u'!', u'--', u'if', u'(', u'w0', u')', u'{', u'var', u'imgN=', u"'", u'<', u'img', u'src=', u"''", u'http', u':', u'//server-uk.imrworldwide.com/cgi-bin/count', u'?', u"ref='+", u'refR+', u"'", u'&', u"cid='+pCid+", u"'", u"''", u'width=1', u'height=1', u'>', u"'", u';', u'if', u'(', u'navigator.userAgent.indexOf', u'(', u"'Mac", u"'", u')', u'!', u'=-1', u')', u'{', u'document.write', u'(', u'imgN', u')', u';', u'}', u'else', u'{', u'document.write', u'(', u"'", u'<', u'applet', u'code=', u"''", u'Measure.class', u"''", u"'+", u"'codebase=", u"''", u'http', u':', u'//server-uk.imrworldwide.com/', u"''", u"'+'width=1", u'height=2', u'>', u"'+", u"'", u'<', u'param', u'name=', u"''", u'ref', u"''", u'value=', u"''", u"'+refR+", u"'", u"''", u'>', u"'+", u"'", u'<', u'param', u'name=', u"''", u'cid', u"''", u'value=', u"''", u"'+pCid+", u"'", u"''", u'>', u'<', u'textflow', u'>', u"'+imgN+", u"'", u'<', u'/textflow', u'>', u'<', u'/applet', u'>', u"'", u')', u';', u'}', u'}', u'document.write', u'(', u'``', u'<', u'COMMENT', u'>', u"''", u')', u';', u'//', u'--', u'>', u'var', u'si', u'=', u'document.location+', u"''", u"''", u';', u'var', u'tsi', u'=', u'si.replace', u'(', u'``', u'.stm', u"''", u',', u"''", u"''", u')', u'.substr', u'(', u'si.length-11', u',', u'si.length', u')', u';', u'if', u'(', u'!', u'tsi.match', u'(', u'/\\d\\d\\d\\d\\d\\d\\d/', u')', u')', u'{', u'tsi', u'=', u'0', u';', u'}', u'document.write', u'(', u"'", u'<', u'img', u'src=', u"''", u'http', u':', u'//stats.bbc.co.uk/o.gif', u'?', u'~RS~s~RS~News~RS~t~RS~HighWeb_Legacy~RS~i~RS~', u"'", u'+', u'tsi', u'+', u"'~RS~p~RS~0~RS~u~RS~/2/hi/health/2284783.stm~RS~r~RS~", u'(', u'none', u')', u'~RS~a~RS~International~RS~q~RS~~RS~z~RS~58~RS~', u"''", u'>', u"'", u')', u';']
+>>> tokens = tokens[110:390]
+>>> text = nltk.Text(tokens)
+>>> text.concordance('gene')
+Displaying 5 of 5 matches:
+hey say too few people now carry the gene for blondes to last beyond the next 
+blonde hair is caused by a recessive gene . In order for a child to have blond
+ have blonde hair , it must have the gene on both sides of the family in the g
+ere is a disadvantage of having that gene or by chance . They do n't disappear
+des would disappear is if having the gene was a disadvantage and I do not thin
+>>> path = nltk.data.find('corpora/unicode_samples/polish-lat2.txt')
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+  File "/home/oliverlevyorl/.local/lib/python2.7/site-packages/nltk/data.py", line 701, in find
+    raise LookupError(resource_not_found)
+LookupError: 
+**********************************************************************
+  Resource unicode_samples not found.
+  Please use the NLTK Downloader to obtain the resource:
+
+  >>> import nltk
+  >>> nltk.download('unicode_samples')
+  
+  For more information see: https://www.nltk.org/data.html
+
+  Attempted to load corpora/unicode_samples/polish-lat2.txt
+
+  Searched in:
+    - '/home/oliverlevyorl/nltk_data'
+    - '/usr/nltk_data'
+    - '/usr/share/nltk_data'
+    - '/usr/lib/nltk_data'
+    - '/usr/share/nltk_data'
+    - '/usr/local/share/nltk_data'
+    - '/usr/lib/nltk_data'
+    - '/usr/local/lib/nltk_data'
+**********************************************************************
+
+>>> nltk.download('unicode_samples')
+[nltk_data] Downloading package unicode_samples to
+[nltk_data]     /home/oliverlevyorl/nltk_data...
+[nltk_data]   Unzipping corpora/unicode_samples.zip.
+True
+>>> path = nltk.data.find('corpora/unicode_samples/polish-lat2.txt')
+>>> f= open(path, encoding='latin2')
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+TypeError: 'encoding' is an invalid keyword argument for this function
+>>> f= open(path)
+>>> for line in f:
+...     line = line.strip()
+...     print(line)
+... 
+Pruska Biblioteka Pa�stwowa. Jej dawne zbiory znane pod nazw�
+"Berlinka" to skarb kultury i sztuki niemieckiej. Przewiezione przez
+Niemc�w pod koniec II wojny �wiatowej na Dolny �l�sk, zosta�y
+odnalezione po 1945 r. na terytorium Polski. Trafi�y do Biblioteki
+Jagiello�skiej w Krakowie, obejmuj� ponad 500 tys. zabytkowych
+archiwali�w, m.in. manuskrypty Goethego, Mozarta, Beethovena, Bacha.
+>>> for line in f:
+...     line = line.strip()
+...     print(line.encode('unicode_escape'))
+... 
+>>> f= open(path)
+>>> for line in f:
+...     line = line.strip()
+...     print(line.encode('unicode_escape'))
+... 
+Traceback (most recent call last):
+  File "<stdin>", line 3, in <module>
+UnicodeDecodeError: 'ascii' codec can't decode byte 0xf1 in position 20: ordinal not in range(128)
+>>> nacute = '\u0144'
+>>> nacute
+'\\u0144'
+>>> 
+
