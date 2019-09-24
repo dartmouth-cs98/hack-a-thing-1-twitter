@@ -1,0 +1,485 @@
+
+liverlevyorl@oliverlevyorl-Inspiron-3541:~$ python
+Python 2.7.12 (default, Aug 22 2019, 16:36:40) 
+[GCC 5.4.0 20160609] on linux2
+Type "help", "copyright", "credits" or "license" for more information.
+>>> import nltk
+>>> from nltk.corpus import brown
+>>> brown.categories()
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+  File "/home/oliverlevyorl/.local/lib/python2.7/site-packages/nltk/corpus/util.py", line 123, in __getattr__
+    self.__load()
+  File "/home/oliverlevyorl/.local/lib/python2.7/site-packages/nltk/corpus/util.py", line 88, in __load
+    raise e
+LookupError: 
+**********************************************************************
+  Resource brown not found.
+  Please use the NLTK Downloader to obtain the resource:
+
+  >>> import nltk
+  >>> nltk.download('brown')
+  
+  For more information see: https://www.nltk.org/data.html
+
+  Attempted to load corpora/brown
+
+  Searched in:
+    - '/home/oliverlevyorl/nltk_data'
+    - '/usr/nltk_data'
+    - '/usr/share/nltk_data'
+    - '/usr/lib/nltk_data'
+    - '/usr/share/nltk_data'
+    - '/usr/local/share/nltk_data'
+    - '/usr/lib/nltk_data'
+    - '/usr/local/lib/nltk_data'
+**********************************************************************
+
+>>> import nltk
+>>> nltk.download('brown')
+[nltk_data] Downloading package brown to
+[nltk_data]     /home/oliverlevyorl/nltk_data...
+[nltk_data]   Unzipping corpora/brown.zip.
+True
+>>> brown.categories()
+[u'adventure', u'belles_lettres', u'editorial', u'fiction', u'government', u'hobbies', u'humor', u'learned', u'lore', u'mystery', u'news', u'religion', u'reviews', u'romance', u'science_fiction']
+>>> exit()
+oliverlevyorl@oliverlevyorl-Inspiron-3541:~$ python
+Python 2.7.12 (default, Aug 22 2019, 16:36:40) 
+[GCC 5.4.0 20160609] on linux2
+Type "help", "copyright", "credits" or "license" for more information.
+>>> import nltk
+>>> cfd = nltk.ConditionalFreqDist((genre,words) 
+... for genre in ['news','romance']
+... for fileid in brown.fileids()
+... 
+... 
+... for words in brown.words(fileid)
+... for word in brown.words(fileid)
+... 
+... 
+... )
+Traceback (most recent call last):
+  File "<stdin>", line 2, in <module>
+  File "/home/oliverlevyorl/.local/lib/python2.7/site-packages/nltk/probability.py", line 1865, in __init__
+    for (cond, sample) in cond_samples:
+  File "<stdin>", line 3, in <genexpr>
+NameError: global name 'brown' is not defined
+>>> nltk.download('brown')
+[nltk_data] Downloading package brown to
+[nltk_data]     /home/oliverlevyorl/nltk_data...
+[nltk_data]   Package brown is already up-to-date!
+True
+>>> from nltk.corpus import brown
+>>> genre_word = [(genre,word)
+... for genre in ['news','romance']
+... for word in brown.words(categories=genre)]
+>>> len (genre_word)
+170576
+>>> days=['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday']
+>>> cfd = mltk.ConditionalFreqDist(genre_word)
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+NameError: name 'mltk' is not defined
+>>> cfd = nltk.ConditionalFreqDist(genre_word)
+>>> cfd.tabulate(samples=days)
+           Monday   Tuesday Wednesday  Thursday    Friday  Saturday    Sunday 
+   news        54        43        22        20        41        33        51 
+romance         2         3         3         1         3         4         5 
+>>> cfd.plot(samples=days)
+/usr/lib/python2.7/dist-packages/matplotlib/font_manager.py:273: UserWarning: Matplotlib is building the font cache using fc-list. This may take a moment.
+  warnings.warn('Matplotlib is building the font cache using fc-list. This may take a moment.')
+<matplotlib.axes._subplots.AxesSubplot object at 0x7efbf0f72b90>
+>>> def generate_model(cfdist, word, num=15):
+... for i in range(num):
+  File "<stdin>", line 2
+    for i in range(num):
+      ^
+IndentationError: expected an indented block
+>>> def generate_model(cfdist, word, num=15):
+...     for i in range(num):
+...             print(word, end = ' ')
+  File "<stdin>", line 3
+    print(word, end = ' ')
+                    ^
+SyntaxError: invalid syntax
+>>> def generate_model(cfdist, word, num=15):
+...     for i in range(num):
+...             print(word, end=' ')
+  File "<stdin>", line 3
+    print(word, end=' ')
+                   ^
+SyntaxError: invalid syntax
+>>> def generate_model(cfdist, word, num=15):
+...     for i in range(num):
+...             print(word + ' ')
+...             word=cfdist[word].max()
+... 
+>>> exit()
+oliverlevyorl@oliverlevyorl-Inspiron-3541:~$ ls /usr/share
+a11y-profile-manager         libexttextcat
+accounts                     libgnomekbd
+accountsservice              libgphoto2
+aclocal                      libgweather
+acpi-support                 liblangtag
+activity-log-manager         liblouis
+adduser                      liblouisutdml
+adium                        libnma
+aisleriot                    libnm-gtk
+alsa                         libparse-debianchangelog-perl
+alsa-base                    libquvi-scripts
+apparmor                     libreoffice
+appdata                      librevenge
+app-info                     libsensors4
+app-install                  libthai
+application-registry         libtimezonemap
+applications                 libtool
+apport                       libwacom
+apps                         lightdm
+apr-1.0                      lintian
+apturl                       linux-sound-base
+aspell                       locale
+avahi                        locale-langpack
+backgrounds                  locales
+base-files                   man
+base-passwd                  man-db
+bash-completion              matplotlib
+binfmts                      maven-repo
+boostbook                    media-player-info
+boost-build                  menu
+branding                     mercurial
+brltty                       metacity
+bug                          mime
+build-essential              mime-info
+ca-certificates              mimelnk
+calendar                     misc
+ccsm                         mobile-broadband-provider-info
+checkbox-converged           mousetweaks
+click                        mozilla
+cmake-3.5                    mpi-default-dev
+cogl                         myspell
+color                        mysql-common
+colord                       mythes
+columbus1                    nano
+command-not-found            nautilus-share
+common-licenses              netpbm
+compiz                       nm-applet
+compizconfig                 notify-osd
+consolefonts                 numpy
+console-setup                numpy3
+consoletrans                 nux
+content-hub                  OGRE
+cups                         omf
+dbus-1                       onboard
+debconf                      openal
+debhelper                    openmpi
+debianutils                  orca
+deja-dup                     os-prober
+desktop-directories          p11-kit
+dh-python                    package-data-downloads
+dict                         pam
+dictionaries-common          pam-configs
+distro-info                  perl
+djvu                         perl5
+dns                          pixmaps
+dnsmasq-base                 pkgconfig
+doc                          pkg-config-crosswrapper
+doc-base                     pkg-config-dpkghook
+docutils                     plainbox-provider-checkbox
+dpkg                         plainbox-provider-resource-generic
+emacs                        plainbox-providers-1
+enchant                      plymouth
+eog                          pnm2ppa
+et                           po-debconf
+evince                       polkit-1
+evolution-data-server        poppler
+example-content              popularity-contest
+file                         ppd
+file-roller                  ppp
+fontconfig                   proj
+fonts                        pulseaudio
+foo2qpdl                     pyshared
+foo2zjs                      PySide2
+games                        python
+gazebo                       python3
+gazebo-7                     python3-plainbox
+gcc-9                        python-apt
+gconf                        python-wheels
+GConf                        qt4
+gcr-3                        qt5
+gdal                         qtchooser
+gdb                          readline
+gdm                          remmina
+gedit                        resolvconf
+geoclue-providers            rhythmbox
+GeoIP                        rsyslog
+gettext                      rubygems-integration
+gettext-0.19.7               screen
+ghostscript                  sdformat
+gir-1.0                      seahorse
+git-core                     secureboot
+gitweb                       session-migration
+glib-2.0                     sgml
+gmock                        sgml-base
+gnome                        shotwell
+gnome-background-properties  simple-scan
+gnome-bluetooth              simplescreenrecorder
+gnome-control-center         sip
+gnome-mahjongg               snmp
+gnome-mines                  software-properties
+gnome-online-accounts        sounds
+gnome-session                speech-dispatcher
+gnome-shell                  ssl-cert
+gnome-software               system-config-printer
+gnome-sudoku                 systemd
+gnome-user-share             systemtap
+gnome-video-effects          sysv-rc
+gnome-vpn-properties         tabset
+gnupg                        tcltk
+gnupg2                       telepathy
+graphviz                     terminfo
+groff                        themes
+grub                         thumbnailers
+grub-gfxpayload-lists        totem
+gst-plugins-base             transmission
+gstreamer-1.0                ubuntu
+gtk-doc                      ubuntu-drivers-common
+gtk-engines                  ubuntu-release-upgrader
+gtksourceview-3.0            ufw
+guile                        unattended-upgrades
+gutenprint                   unity
+gvfs                         unity-control-center
+hal                          unity-greeter
+hardening-includes           unity-scopes
+help                         unity-settings-daemon
+help-langpack                unity-webapps
+hplip                        update-manager
+hunspell                     update-notifier
+hwdata                       upstart
+hyphen                       urdfdom
+i18n                         urdfdom_headers
+ibus                         url-dispatcher
+ibus-table                   usb-creator
+icons                        usb_modeswitch
+icu                          vala
+ImageMagick-6                vim
+im-config                    vino
+indicator-application        vte
+indicator-power              vtk-6.2
+indicators                   wayland
+info                         webbrowser-app
+initramfs-tools              woeusb
+insserv                      wx-3.0-gtk
+intel-gpu-tools              X11
+intltool-debian              xdg-desktop-portal
+iptables                     xdiagnose
+java                         xgreeters
+javascript                   xml
+kde4                         xml-core
+keyrings                     xsessions
+language-selector            yelp
+language-support             yelp-xsl
+language-tools               zeitgeist
+libaudio2                    zenity
+libc-bin                     zoneinfo
+libdrm                       zsh
+oliverlevyorl@oliverlevyorl-Inspiron-3541:~$ ls /usr/share/dict
+american-english  cracklib-small          words
+british-english   README.select-wordlist  words.pre-dictionaries-common
+oliverlevyorl@oliverlevyorl-Inspiron-3541:~$ ls /usr/share/dict/words
+/usr/share/dict/words
+oliverlevyorl@oliverlevyorl-Inspiron-3541:~$ python
+Python 2.7.12 (default, Aug 22 2019, 16:36:40) 
+[GCC 5.4.0 20160609] on linux2
+Type "help", "copyright", "credits" or "license" for more information.
+>>> import nltk
+>>> nltk.download('gutenberg')
+[nltk_data] Downloading package gutenberg to
+[nltk_data]     /home/oliverlevyorl/nltk_data...
+[nltk_data]   Unzipping corpora/gutenberg.zip.
+True
+>>> from nltk.corpus import gutenberg
+>>> def unusual_words(text):
+...     text_vocab = set(word.lower() for word in text if word.isalpha())
+...     normal_english = set(word.lower() for word in nltk.corpus.words.words())
+...     stranger_things = text_vocab - normal_english
+...     return sorted(stranger_things)
+... 
+>>> unusual_words(nltk.corpus.gutenberg.words('austen-sense.txt')
+... )
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+  File "<stdin>", line 3, in unusual_words
+  File "/home/oliverlevyorl/.local/lib/python2.7/site-packages/nltk/corpus/util.py", line 123, in __getattr__
+    self.__load()
+  File "/home/oliverlevyorl/.local/lib/python2.7/site-packages/nltk/corpus/util.py", line 88, in __load
+    raise e
+LookupError: 
+**********************************************************************
+  Resource words not found.
+  Please use the NLTK Downloader to obtain the resource:
+
+  >>> import nltk
+  >>> nltk.download('words')
+  
+  For more information see: https://www.nltk.org/data.html
+
+  Attempted to load corpora/words
+
+  Searched in:
+    - '/home/oliverlevyorl/nltk_data'
+    - '/usr/nltk_data'
+    - '/usr/share/nltk_data'
+    - '/usr/lib/nltk_data'
+    - '/usr/share/nltk_data'
+    - '/usr/local/share/nltk_data'
+    - '/usr/lib/nltk_data'
+    - '/usr/local/lib/nltk_data'
+**********************************************************************
+
+>>> nltk.download('words', 'chat')
+[nltk_data] Downloading package words to chat...
+[nltk_data]   Unzipping corpora/words.zip.
+True
+>>> unusual_words(nltk.corpus.gutenberg.words('austen-sense.txt'))
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+  File "<stdin>", line 3, in unusual_words
+  File "/home/oliverlevyorl/.local/lib/python2.7/site-packages/nltk/corpus/util.py", line 123, in __getattr__
+    self.__load()
+  File "/home/oliverlevyorl/.local/lib/python2.7/site-packages/nltk/corpus/util.py", line 88, in __load
+    raise e
+LookupError: 
+**********************************************************************
+  Resource words not found.
+  Please use the NLTK Downloader to obtain the resource:
+
+  >>> import nltk
+  >>> nltk.download('words')
+  
+  For more information see: https://www.nltk.org/data.html
+
+  Attempted to load corpora/words
+
+  Searched in:
+    - '/home/oliverlevyorl/nltk_data'
+    - '/usr/nltk_data'
+    - '/usr/share/nltk_data'
+    - '/usr/lib/nltk_data'
+    - '/usr/share/nltk_data'
+    - '/usr/local/share/nltk_data'
+    - '/usr/lib/nltk_data'
+    - '/usr/local/lib/nltk_data'
+**********************************************************************
+
+>>> nltk.download('words')
+[nltk_data] Downloading package words to
+[nltk_data]     /home/oliverlevyorl/nltk_data...
+[nltk_data]   Unzipping corpora/words.zip.
+True
+>>> unusual_words(nltk.corpus.gutenberg.words('austen-sense.txt'))
+[u'abbeyland', u'abhorred', u'abilities', u'abounded', u'abridgement', u'abused', u'abuses', u'accents', u'accepting', u'accommodations', u'accompanied', u'accounted', u'accounts', u'accustomary', u'aches', u'acknowledging', u'acknowledgment', u'acknowledgments', u'acquaintances', u'acquiesced', u'acquitted', u'acquitting', u'acted', u'actions', u'adapted', u'adding', u'additions', u'addressed', u'addresses', u'addressing', u'adhering', u'adieus', u'adjusting', u'administering', u'admirers', u'admires', u'admitting', u'adorned', u'advances', u'advantages', u'affairs', u'affections', u'affects', u'affixed', u'afflictions', u'afforded', u'affording', u'ages', u'agitated', u'agonies', u'ailments', u'aimed', u'alarms', u'alienated', u'alighted', u'alleged', u'allenham', u'allowances', u'allowed', u'allowing', u'alluded', u'alterations', u'altered', u'altering', u'amended', u'amounted', u'amusements', u'ankles', u'annamaria', u'annexed', u'announced', u'announcing', u'annuities', u'annum', u'answered', u'answering', u'answers', u'anticipated', u'anticipating', u'anticipations', u'anymore', u'apartments', u'apologies', u'apologising', u'apologized', u'appearances', u'appeared', u'appearing', u'appeased', u'appetites', u'applauded', u'applying', u'appointed', u'apprehended', u'apprehensions', u'approached', u'approved', u'arbour', u'ardour', u'arguments', u'arranged', u'arrangements', u'arranging', u'arrived', u'arrives', u'arriving', u'ascended', u'ascertained', u'asked', u'asking', u'assembled', u'assemblies', u'asserted', u'assertions', u'assiduities', u'assisted', u'assisting', u'associating', u'assurances', u'astonished', u'atoned', u'atoning', u'attaching', u'attachments', u'attacked', u'attacks', u'attained', u'attempted', u'attempting', u'attempts', u'attendants', u'attended', u'attending', u'attentions', u'attracted', u'attractions', u'attributed', u'attributing', u'auditors', u'augmenting', u'austen', u'authorised', u'authors', u'availed', u'avignon', u'avoided', u'avoiding', u'awaited', u'awakened', u'awaking', u'bags', u'balls', u'banished', u'barouches', u'bathed', u'bears', u'beasts', u'beauties', u'became', u'bedrooms', u'beds', u'befallen', u'befalls', u'befell', u'began', u'begged', u'begins', u'behaved', u'beings', u'believed', u'believes', u'belonged', u'belongs', u'benefited', u'bequeathed', u'berkeley', u'bestowed', u'betrayed', u'betraying', u'biased', u'blackest', u'blameable', u'blessings', u'blights', u'blossoms', u'blundered', u'blushed', u'blushes', u'bolder', u'bones', u'bonomi', u'books', u'booksellers', u'borrowed', u'bottoms', u'boys', u'breakfasting', u'bribing', u'brightened', u'brighter', u'bringing', u'brings', u'broader', u'brothers', u'bruised', u'buildings', u'bursts', u'buying', u'called', u'calls', u'calming', u'candles', u'candour', u'canvassing', u'cards', u'cares', u'caresses', u'careys', u'carriages', u'carries', u'cases', u'casts', u'cats', u'caused', u'ceased', u'ceasing', u'censured', u'centre', u'certainties', u'chagrined', u'chairs', u'chambers', u'chanced', u'changed', u'changes', u'changing', u'characters', u'charged', u'charmed', u'charms', u'cheated', u'checking', u'cheeks', u'cheerfuller', u'cherished', u'cherries', u'children', u'choked', u'chuse', u'chusing', u'circles', u'circumstances', u'civilities', u'claimed', u'claiming', u'claims', u'clarke', u'cleared', u'cleveland', u'clogged', u'closing', u'clouds', u'coats', u'collecting', u'coloured', u'colouring', u'combe', u'comforted', u'comforts', u'comings', u'commanded', u'commands', u'commended', u'comments', u'commissioned', u'commonest', u'communicated', u'companions', u'compared', u'compares', u'comparisons', u'complained', u'complaining', u'complaints', u'completed', u'compliments', u'comprehended', u'concealing', u'concerns', u'concessions', u'concluded', u'conclusions', u'conditions', u'conducted', u'confessed', u'confidante', u'conforming', u'congratulated', u'congratulating', u'congratulations', u'conjectured', u'conjectures', u'conjecturing', u'connections', u'conquests', u'consented', u'consequences', u'considerations', u'considers', u'consisted', u'consists', u'consoled', u'conspired', u'constantia', u'consulted', u'contained', u'containing', u'contend', u'contenting', u'continuing', u'contradicted', u'contrasted', u'contributed', u'contributing', u'contrived', u'contrives', u'contriving', u'controlled', u'conveniences', u'conversations', u'conversed', u'conversing', u'conveyed', u'conveying', u'copying', u'cordials', u'cottages', u'counsellor', u'counteracted', u'couples', u'courted', u'courting', u'courtland', u'cousins', u'cowper', u'cows', u'coxcombs', u'cramps', u'created', u'creating', u'creatures', u'cries', u'crimsoned', u'curtsying', u'cutlets', u'danced', u'dances', u'dared', u'darker', u'dartford', u'dashwood', u'dashwoods', u'daughters', u'davies', u'dawdled', u'dawlish', u'dawned', u'dearer', u'dearest', u'debated', u'debts', u'deceived', u'deciding', u'decisions', u'declares', u'declaring', u'declining', u'deemed', u'deeper', u'deepest', u'defects', u'defended', u'deficiencies', u'degrees', u'delaford', u'delayed', u'delays', u'deliberating', u'delicacies', u'delighful', u'delineated', u'delivered', u'demanded', u'demands', u'demonstrations', u'demur', u'denied', u'dennison', u'denoted', u'denoting', u'departing', u'depended', u'depends', u'deprived', u'described', u'describing', u'deserts', u'deserves', u'designs', u'desiring', u'despatch', u'despatching', u'despised', u'despising', u'destroyed', u'destroys', u'detaining', u'detected', u'detecting', u'determining', u'deterred', u'detested', u'devolved', u'died', u'dies', u'differed', u'differing', u'difficulties', u'dimensions', u'diminished', u'dined', u'dinners', u'directing', u'directions', u'disagreements', u'disappeared', u'disappointments', u'disapproved', u'disapproves', u'disapproving', u'discarded', u'discharged', u'disclaiming', u'disclosing', u'discontents', u'discovering', u'discussions', u'disgraced', u'disinherited', u'disliked', u'dismissed', u'dismounted', u'dispatched', u'dispatches', u'dispersing', u'disposing', u'disputes', u'disqualifications', u'disregarded', u'dissembling', u'dissented', u'distresses', u'distrusts', u'diverted', u'doatingly', u'donavan', u'doomed', u'dooming', u'doors', u'dorsetshire', u'doubted', u'doubts', u'douceur', u'downs', u'dr', u'drains', u'drawings', u'draws', u'dreaded', u'dreading', u'dreaming', u'dresses', u'drives', u'dropped', u'drops', u'drury', u'duets', u'duties', u'earlier', u'earliest', u'earned', u'ears', u'echoed', u'editions', u'edtions', u'effected', u'effecting', u'effusions', u'ellison', u'ellisons', u'eloping', u'eluded', u'embellishments', u'embraced', u'embraces', u'employments', u'enabled', u'enamoured', u'encouraged', u'encouragements', u'encroachments', u'encumbered', u'endeavoring', u'endeavors', u'endeavour', u'endeavoured', u'endeavouring', u'endeavours', u'endowed', u'ends', u'endured', u'enfeebled', u'enforcing', u'engagements', u'england', u'enjoyed', u'enjoyments', u'enquired', u'enquiries', u'enquiring', u'ensued', u'ensured', u'entered', u'entertained', u'entitled', u'entreated', u'entreaties', u'entrusted', u'equalled', u'equals', u'erred', u'errors', u'escaped', u'esq', u'establishing', u'esteemed', u'esteeming', u'esteems', u'estimating', u'estranged', u'evenings', u'events', u'evils', u'examined', u'exceeded', u'excellencies', u'exchanged', u'exclaimed', u'exclamations', u'excused', u'excuses', u'exercised', u'exercising', u'exerted', u'exertions', u'exeter', u'exhilarated', u'existed', u'expectations', u'expected', u'expecting', u'expects', u'expenses', u'experiencing', u'explained', u'explanations', u'expressing', u'expressions', u'extolling', u'extorted', u'extorting', u'extremest', u'eyeing', u'eyes', u'faces', u'facts', u'failed', u'falls', u'familiarized', u'families', u'fancying', u'fates', u'fatigued', u'fatigues', u'faults', u'favour', u'favourable', u'favourite', u'favourites', u'fearing', u'fears', u'features', u'feelings', u'feels', u'feet', u'felicitations', u'females', u'ferrars', u'fetches', u'fettered', u'finds', u'finest', u'fingers', u'flattered', u'flatteries', u'flowed', u'fluctuating', u'flushed', u'foibles', u'followed', u'follows', u'fond', u'footsteps', u'forebodings', u'foreplanned', u'foresaw', u'foreseeing', u'foreseen', u'forfeited', u'forfeiting', u'forgave', u'forgiven', u'forms', u'forsaking', u'fortunes', u'forwarded', u'foundations', u'founded', u'fowls', u'friendliest', u'friends', u'frightens', u'froid', u'frosts', u'fulfil', u'fulfilled', u'fullest', u'gained', u'gales', u'gardens', u'garrets', u'gates', u'gathered', u'generations', u'gentlemen', u'gigs', u'gilberts', u'girls', u'gives', u'glances', u'gloried', u'gloves', u'godby', u'goings', u'goodby', u'governed', u'gowns', u'graces', u'grandmothers', u'granted', u'greatest', u'grieves', u'grows', u'guardians', u'guessed', u'guests', u'guided', u'guineas', u'habits', u'hallooing', u'hands', u'handsomer', u'handsomest', u'hang', u'hanover', u'happened', u'happens', u'hardened', u'hardships', u'harley', u'has', u'hastened', u'hastening', u'hated', u'hates', u'hating', u'having', u'hazarded', u'hazarding', u'heads', u'heard', u'hears', u'heightened', u'heightening', u'heights', u'heirs', u'held', u'hens', u'henshawe', u'hesitated', u'hiding', u'hills', u'hinted', u'hints', u'hoarded', u'holborn', u'holburn', u'holds', u'holidays', u'homes', u'honeysuckles', u'honiton', u'honour', u'honourable', u'honourably', u'honoured', u'honours', u'hopes', u'hoping', u'horrors', u'horses', u'hours', u'houses', u'howsever', u'humbled', u'humiliations', u'humored', u'humoured', u'humouring', u'hunted', u'hunters', u'hunts', u'hurrying', u'husbands', u'huswifes', u'ideas', u'idled', u'idolized', u'ii', u'imaginations', u'imagined', u'imagining', u'imbibed', u'immoveable', u'imparted', u'imperfections', u'implied', u'implies', u'impoverished', u'impoverishing', u'improved', u'improvements', u'imputed', u'inclinations', u'inclined', u'inclosing', u'including', u'incommoded', u'inconveniences', u'increased', u'incurred', u'incurring', u'indulged', u'infants', u'inflicted', u'inflicting', u'influenced', u'inforce', u'inforced', u'informing', u'inhabitants', u'inhabiting', u'inheriting', u'injuries', u'inquired', u'inquiries', u'insinuations', u'insisted', u'installed', u'instigated', u'instructions', u'insulted', u'intends', u'intentions', u'intents', u'interests', u'interposed', u'interspersed', u'intervals', u'interviews', u'intimated', u'introduced', u'introducing', u'intruded', u'invented', u'inventing', u'invitations', u'invited', u'irritated', u'irritates', u'issued', u'jealousies', u'jenning', u'jennings', u'jewels', u'jilting', u'joined', u'joked', u'jokes', u'joking', u'joys', u'judged', u'judging', u'judgments', u'jumbled', u'justified', u'keeps', u'keys', u'kicked', u'kinder', u'kindest', u'kingham', u'kissed', u'kisses', u'knees', u'knives', u'knows', u'laboured', u'lamentations', u'lamps', u'lanes', u'languages', u'larger', u'largest', u'lasted', u'laughed', u'laughs', u'leagued', u'legacies', u'lengthened', u'lengths', u'lessened', u'lessening', u'letters', u'letting', u'lies', u'lifted', u'lightened', u'liked', u'likes', u'limbs', u'limits', u'lines', u'lingered', u'lingering', u'lips', u'listened', u'lives', u'livings', u'll', u'lodges', u'loitered', u'lombardy', u'london', u'longed', u'longest', u'longstaple', u'looked', u'looks', u'loved', u'lovers', u'loves', u'lowered', u'lurking', u'magna', u'maids', u'maintained', u'makes', u'mama', u'managed', u'marlborough', u'marriages', u'marries', u'matters', u'maxims', u'meadows', u'meals', u'means', u'meantime', u'measures', u'medicines', u'meditated', u'meditations', u'meetings', u'mentioned', u'mentioning', u'merest', u'merits', u'merrier', u'messages', u'middleton', u'middletons', u'militated', u'minds', u'minutes', u'misapplied', u'misinformed', u'missed', u'misses', u'mistakes', u'mixing', u'modestest', u'mohrs', u'moments', u'months', u'mosquitoes', u'mothers', u'motives', u'moved', u'murmurings', u'muttered', u'nabobs', u'named', u'names', u'natured', u'nearer', u'needed', u'neglected', u'neighbour', u'neighbourhood', u'neighbouring', u'neighbourly', u'neighbours', u'nerves', u'nests', u'nettles', u'newer', u'newspapers', u'nicest', u'nieces', u'nipped', u'nodded', u'nods', u'noisier', u'notes', u'noticed', u'noticing', u'notions', u'nt', u'nurses', u'obeyed', u'objected', u'objections', u'objects', u'obligations', u'observations', u'observed', u'obstacles', u'obstructed', u'obtained', u'obtaining', u'obviated', u'obviating', u'occasioned', u'occasions', u'occupations', u'occupied', u'occurred', u'oddest', u'offence', u'offences', u'offending', u'offered', u'offices', u'oftener', u'oftenest', u'oldest', u'olives', u'omitted', u'ones', u'opened', u'opinions', u'opportunities', u'ordained', u'orders', u'originated', u'ornamented', u'ornaments', u'others', u'outdone', u'outgrown', u'outlived', u'outraged', u'outstaid', u'outstretched', u'outstripped', u'outweighs', u'overcame', u'overcoming', u'overheard', u'overlooked', u'overpowered', u'overspreading', u'overstrained', u'owed', u'owned', u'owners', u'owning', u'paces', u'pacified', u'packages', u'packed', u'pages', u'paid', u'pains', u'palanquins', u'palmers', u'pangs', u'papers', u'parcels', u'parents', u'parlors', u'parlour', u'parrys', u'particulars', u'parties', u'parting', u'partners', u'parts', u'passages', u'passed', u'passions', u'patches', u'patronised', u'patterns', u'paused', u'pausing', u'pearls', u'perceived', u'perfections', u'performances', u'performed', u'performers', u'performing', u'permitting', u'persecutions', u'persevered', u'persisted', u'persons', u'persuading', u'pictures', u'pieces', u'pimples', u'piqued', u'pitched', u'pitied', u'placed', u'placing', u'plaguing', u'planning', u'plans', u'plantations', u'plants', u'played', u'playfellows', u'playing', u'playthings', u'pleasanter', u'pleasantest', u'pleased', u'pleasures', u'plums', u'pointers', u'points', u'ponds', u'poplars', u'popt', u'possesses', u'possessions', u'postponing', u'posts', u'pounds', u'poured', u'powers', u'practices', u'practise', u'practised', u'praised', u'praises', u'prayers', u'pre', u'preceded', u'preferring', u'prejudices', u'premeditated', u'premises', u'prenticed', u'preparations', u'preparing', u'prescribed', u'prescriptions', u'presented', u'presenting', u'presents', u'preserved', u'presided', u'pressed', u'presumed', u'pretence', u'pretends', u'pretensions', u'prettier', u'prettiest', u'prevailed', u'prevailing', u'prevented', u'preyed', u'principles', u'probabilities', u'proceeded', u'proclaimed', u'procured', u'procuring', u'producing', u'professions', u'profited', u'prohibited', u'projects', u'promised', u'promises', u'promontories', u'promoted', u'promoting', u'prompted', u'pronouncing', u'proofs', u'propensities', u'prophecies', u'proposals', u'proposed', u'prospects', u'protestations', u'protested', u'proud', u'provisions', u'provoked', u'publishing', u'pulled', u'puppies', u'purchases', u'purposes', u'pursued', u'pursuing', u'pursuits', u'puts', u'putting', u'qualifications', u'quarrelled', u'quarrelling', u'questions', u'quickened', u'quicker', u'quickest', u'quieted', u'quitting', u'rained', u'raises', u'rambles', u'raptures', u'reached', u'reaped', u'reasonings', u'reasons', u'recalled', u'receiving', u'reckoned', u'reckons', u'reclining', u'recognised', u'recollecting', u'recommended', u'recommending', u'reconciled', u'recovered', u'recovering', u'recreating', u'recurred', u'referred', u'referring', u'refinements', u'reflections', u'refreshed', u'refreshments', u'refused', u'regarded', u'regards', u'regrets', u'regretted', u'regretting', u'rejected', u'rejoiced', u'relating', u'relations', u'relatives', u'released', u'relics', u'relied', u'relinquished', u'relying', u'remained', u'remaining', u'remarks', u'remedies', u'remembered', u'remembering', u'remembers', u'remembrances', u'reminded', u'reminding', u'reminds', u'removes', u'rendered', u'renewed', u'renewing', u'renounced', u'repaid', u'repaired', u'repeating', u'repining', u'replied', u'replying', u'reports', u'representations', u'represented', u'representing', u'reproached', u'reproaches', u'reproaching', u'reproved', u'reproving', u'repulsed', u'requested', u'requesting', u'required', u'requires', u'requiring', u'rescued', u'reseated', u'resembled', u'resembling', u'resented', u'resettled', u'resided', u'residing', u'resisted', u'resists', u'resolving', u'resorted', u'resources', u'respected', u'respects', u'rested', u'restored', u'restoring', u'restraints', u'resumed', u'retailed', u'retained', u'retreated', u'retrenched', u'returning', u'reverted', u'revived', u'rewarded', u'rheumatisms', u'ribbons', u'richardson', u'richardsons', u'richer', u'rings', u'rises', u'risking', u'rivals', u'roads', u'roared', u'robbed', u'rocks', u'rooms', u'roused', u'ruins', u'rumour', u'sackville', u'sacrificed', u'sakes', u'salts', u'sandersons', u'sashes', u'sauntered', u'saves', u'savings', u'says', u'scenes', u'schemes', u'scolded', u'scorning', u'scotland', u'scrawls', u'screamed', u'screams', u'screens', u'scrupled', u'scruples', u'scrupling', u'scrutinies', u'searched', u'seasons', u'seats', u'seconded', u'seconds', u'secrets', u'secured', u'secures', u'securing', u'seduced', u'seemed', u'seems', u'seized', u'sellers', u'sends', u'sensations', u'senses', u'sentences', u'sentiments', u'separated', u'separations', u'servants', u'served', u'services', u'shades', u'shakespeare', u'shared', u'sharing', u'sharpe', u'shew', u'shewed', u'shewing', u'shewn', u'shews', u'shillings', u'shocked', u'shoes', u'shops', u'shoulders', u'showed', u'showers', u'shrubberies', u'shrugging', u'shuddering', u'shutters', u'sighed', u'signs', u'silencing', u'silks', u'simpered', u'simpering', u'simplest', u'simpson', u'sisters', u'situations', u'slightest', u'smallest', u'smiled', u'smiles', u'smirked', u'smokes', u'sobbed', u'sobered', u'sobs', u'softened', u'solicitations', u'somersetshire', u'songs', u'soothings', u'sorrows', u'souls', u'sounds', u'sources', u'spared', u'speaks', u'spends', u'spirits', u'sportsmen', u'sprained', u'spraining', u'spunging', u'spurned', u'stairs', u'stammered', u'stanhill', u'stared', u'stares', u'started', u'startled', u'stating', u'staying', u'steele', u'steeles', u'steepest', u'steps', u'stimulated', u'stirred', u'stockings', u'stopt', u'strains', u'strangers', u'streamed', u'strengthened', u'stretched', u'strictest', u'strikes', u'stronger', u'strongest', u'struggled', u'studies', u'stupified', u'styled', u'subjects', u'submitted', u'submitting', u'subsisted', u'subsisting', u'succeeded', u'succour', u'suffered', u'sufferings', u'suffers', u'suggested', u'suited', u'summits', u'summoned', u'superannuated', u'supplanted', u'supplied', u'supplying', u'supported', u'supports', u'surfaces', u'surpassed', u'surprised', u'survived', u'suspecting', u'suspects', u'suspicions', u'swallowed', u'sweetest', u'sweetmeats', u'syllables', u'sympathised', u'symptoms', u'systems', u'takes', u'talents', u'talked', u'talks', u'tallest', u'tastes', u'taverns', u'tears', u'teazed', u'teazing', u'tells', u'tempers', u'tempted', u'tended', u'tenderest', u'terminated', u'terms', u'thanked', u'things', u'thinks', u'thirds', u'thistles', u'thomson', u'thorns', u'thoughts', u'threatened', u'threats', u'thunderbolts', u'tis', u'tithes', u'traced', u'traded', u'trades', u'traits', u'transacted', u'transgressed', u'travellers', u'travelling', u'treasured', u'treated', u'trees', u'trembled', u'tremour', u'trials', u'tricked', u'tricks', u'tries', u'trifled', u'troubles', u'truest', u'trusted', u'truths', u'twould', u'undergone', u'undervalued', u'unfavourable', u'unites', u'unlover', u'unpleasantest', u'urged', u'ushered', u'using', u'valleys', u'variations', u'varying', u've', u'ventured', u'venturing', u'viewed', u'viewing', u'views', u'vigour', u'villages', u'violins', u'virtues', u'visited', u'visitors', u'visits', u'voices', u'vouchsafed', u'waistcoats', u'waited', u'walked', u'walks', u'walls', u'wandered', u'wanted', u'wants', u'warmest', u'weakened', u'weaknesses', u'weddings', u'weeks', u'welcomed', u'westminster', u'westons', u'wettest', u'weymouth', u'whiled', u'whims', u'whitakers', u'whiter', u'whitwell', u'wildest', u'williams', u'willoughby', u'willoughbys', u'windows', u'winks', u'wiping', u'wisest', u'wishes', u'withdrew', u'witnessed', u'witnesses', u'witnessing', u'witticisms', u'wittiest', u'wives', u'women', u'wondered', u'woods', u'words', u'workmen', u'worlds', u'wrapt', u'writes', u'yards', u'years', u'yielded', u'youngest']
+>>> def solve_puzzle(word_list, obli, length, letters):
+...     return [w for w in word_list if len(w)>= length
+...                                     and obli in w
+...                                     and nltk.FreqDist(w) <= puzzle_letters]
+... 
+>>> puzzle_letters = nltk.FreqDist('egivrvonl')
+>>> o = 'r'
+>>> leng = 6
+>>> wordlist = nltk.corpus.words.words()
+>>> solve_puzzle(wordlist, o, leng, puzzle_letters)
+[u'glover', u'gorlin', u'govern', u'grovel', u'ignore', u'involver', u'lienor', u'linger', u'longer', u'lovering', u'noiler', u'overling', u'region', u'renvoi', u'revolving', u'ringle', u'roving', u'violer', u'virole']
+>>> cfd = nltk.ConditionalFreqDist(
+...     (fileid, name[-1])
+...     for fileid in names.fileids()
+...     for name in names.words(fileid))
+Traceback (most recent call last):
+  File "<stdin>", line 3, in <module>
+NameError: name 'names' is not defined
+>>> nltk.download('names')
+[nltk_data] Downloading package names to
+[nltk_data]     /home/oliverlevyorl/nltk_data...
+[nltk_data]   Unzipping corpora/names.zip.
+True
+>>> from nltk.corpus import names
+>>> cfd = nltk.ConditionalFreqDist(
+...     (fileid, name[-1])
+...     for fileid in names.fileids()
+...     for name in names.words(fileid))
+>>> cfd.plot()
+^CTraceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+  File "/home/oliverlevyorl/.local/lib/python2.7/site-packages/nltk/probability.py", line 1956, in plot
+    plt.show()
+  File "/usr/lib/python2.7/dist-packages/matplotlib/pyplot.py", line 244, in show
+    return _show(*args, **kw)
+  File "/usr/lib/python2.7/dist-packages/matplotlib/backend_bases.py", line 192, in __call__
+    self.mainloop()
+  File "/usr/lib/python2.7/dist-packages/matplotlib/backends/backend_tkagg.py", line 74, in mainloop
+    Tk.mainloop()
+  File "/usr/lib/python2.7/lib-tk/Tkinter.py", line 417, in mainloop
+    _default_root.tk.mainloop(n)
+KeyboardInterrupt
+>>> ntlk.download(cmudict)
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+NameError: name 'ntlk' is not defined
+>>> nltk.download('cmudict')
+[nltk_data] Downloading package cmudict to
+[nltk_data]     /home/oliverlevyorl/nltk_data...
+[nltk_data]   Unzipping corpora/cmudict.zip.
+True
+>>> entries = nltk.corpus.cmudict.entries()
+>>> le(entries
+... 
+
+Traceback (most recent call last):
+  File "/usr/lib/python2.7/encodings/utf_8.py", line 15, in decode
+    def decode(input, errors='strict'):
+KeyboardInterrupt
+>>> len(entries)
+133737
+>>> for word, pron in entries:
+...     if l
+
+Traceback (most recent call last):
+  File "/usr/lib/python2.7/encodings/utf_8.py", line 15, in decode
+    def decode(input, errors='strict'):
+KeyboardInterrupt
+>>> p3 = [(pron[0]+'-'+pron[2],word)
+...     for(word,pron) in entries
+...     if pron[0] == 'P' and len(pron) == 3]
+>>> cfd = nltk.CondiitionalFreqDist(p3)
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+AttributeError: 'module' object has no attribute 'CondiitionalFreqDist'
+>>> cfd = nltk.ConditionalFreqDist(p3)
+>>> for template in sorted(cfd.conditions()):
+...     if len(cfd[template])>0:
+...             
+... 
+  File "<stdin>", line 4
+    
+    ^
+IndentationError: expected an indented block
+>>> for template in sorted(cfd.conditions()):
+...     if len(cfd[template])>10:
+...             words = sorted(cfd[template])
+...             wordstring = ' '.join(words)
+...             print(template, wordstring[:70] + "...."
+... 
+... )
+... 
+(u'P-CH', u'patch pautsch peach perch petsch petsche piche piech pietsch pitch pit....')
+(u'P-K', u'pac pack paek paik pak pake paque peak peake pech peck peek perc perk ....')
+(u'P-L', u'pahl pail paille pal pale pall paul paule paull peal peale pearl pearl....')
+(u'P-N', u'paign pain paine pan pane pawn payne peine pen penh penn pin pine pinn....')
+(u'P-P', u'paap paape pap pape papp paup peep pep pip pipe pipp poop pop pope pop....')
+(u'P-R', u'paar pair par pare parr pear peer pier poor poore por pore porr pour....')
+(u'P-S', u'pace pass pasts peace pearse pease perce pers perse pesce piece piss p....')
+(u'P-T', u'pait pat pate patt peart peat peet peete pert pet pete pett piet piett....')
+(u'P-UW1', u'peru peugh pew plew plue prew pru prue prugh pshew pugh....')
+(u'P-Z', u"p's p.'s p.s pais paiz pao's pas pause paws pays paz peas pease pei's ....")
+>>> exit()
+
