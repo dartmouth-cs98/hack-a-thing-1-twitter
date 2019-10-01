@@ -11,13 +11,16 @@
 
 *Within NLP, I explored the following topics:
     1. Cleaning and preparing text with nltk: tokenization, stemming, use of stop words, and other preprocessing techniques.
-       * For the model, I used their tokenization method to break strings apart by punctuation. If I understood the model better, I would use a better tokenization method. (ex. Bob's would be broken apart using their method.)
+       * For the model, I used their tokenization method to break strings apart by punctuation. If I understood the model better, I would use a better tokenization method. (ex. Bob's would be broken apart using their method.).
+
     2. I chose to try and implement a Naive Bayes model & Support Vector Machine. I found several interesting readings that explained the Naive Bayes model, and followed a kaggle tutorial to develop the model over the 'Toxic Comments Dataset' from 'Google Jigsaw'.
+      * The tutorial: https://www.kaggle.com/jhoward/nb-svm-strong-linear-baseline#Building-the-model
       * I tried to understand the model and how the code worked. As I went through each part, I tried to make small changes / customizations, such as loading a stop words list from nltk instead of leaving the option empty.
+      * I also tried to comment each section of the code with my understanding of how the algorithm/code worked.
 
 
 * I also gained some experience using the following python packages:
-  1. numpy for ...
+  1. numpy for working with specialized arrays. 
   2. I used Pandas Dataframes to read the Kaggle's csv data. I gained familiarity with several methods for manipulating and representing Pandas dataframes.
 
 
@@ -28,3 +31,4 @@
 ### What Didn't Work
 * Most of it.
   * My Tweepy program did not authenticate even though I had the correct credentials. I did not get to try authenticating with other Twitter Api wrappers like python-twitter or Twurl.
+  * When I followed the

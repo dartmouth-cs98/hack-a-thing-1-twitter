@@ -26,4 +26,4 @@ def read_dataset():
     print(train.describe(include='all'))
 
 
-    return train, test, subm
+    return train, test, subm, categories

@@ -16,19 +16,21 @@ re_tok = re.compile(f'([{string.punctuation}“”¨«»®´·º½¾¿¡§£₤�
 def tokenize(s): return re_tok.sub(r' \1 ', s).split()
 
 # basic naive bayes feature equation
-def bayes_feat_eq(y_i, y):
-    p = x[y==y_i].sum(0)
+def bayes_feat_eq(y_i, y,termDocMatrix):
+    p = termDocMatrix[y==y_i].sum(0)
+    #smoothing???
     return (p+1) / ((y==y_i).sum()+1)
 
-def get_mdl(y):
+
+def get_mdl(y,termDocMatrix):
     y = y.values
-    r = np.log(bayes_feat_eq(1,y) / bayes_feat_eq(0,y))
+    r = numpy.log(bayes_feat_eq(1,y,termDocMatrix) / bayes_feat_eq(0,y,termDocMatrix))
     m = LogisticRegression(C=4, dual=True)
-    x_nb = x.multiply(r)
+    x_nb = termDocMatrix.multiply(r)
     return m.fit(x_nb, y), r
 
 
-def model_train(train, test, subm):
+def model_train(train, test, subm, categories):
     #According to tutorial, must fill out empty comments or thing complains
     COMMENT = 'comment_text'
     train[COMMENT].fillna("unknown", inplace=True)
@@ -69,22 +71,26 @@ def model_train(train, test, subm):
     print("\nLearning Naive Bayes result: term-doc-matrix\n")
     #The tuple represents: (document_id, token_id)
     #The value following the tuple represents the tf-idf score of a given token in a given document
-    print(trn_term_doc[100])
+    print(trn_term_doc[:100])
     print("First 100 feature names:\n")
-    print(vec.get_feature_names()[100])
+    print(vec.get_feature_names()[:100])
 
 
     x = trn_term_doc
     test_x = test_term_doc
 
+    # Return an array, preds, of the following shape filled with zeros
+    preds = numpy.zeros((len(test), len(categories)))
 
-    preds = np.zeros((len(test), len(label_cols)))
-
-    for i, j in enumerate(label_cols):
+    # Goal?
+    #i is the index of the category, while j is the category itself
+    for i, j in enumerate(categories):
         print('fit', j)
-        m,r = get_mdl(train[j])
+        #get the hyperplane
+        m,r = get_mdl(train[j],x)
+        #fill in predicate list
         preds[:,i] = m.predict_proba(test_x.multiply(r))[:,1]
 
-    submid = pd.DataFrame({'id': subm["id"]})
-    submission = pd.concat([submid, pd.DataFrame(preds, columns = label_cols)], axis=1)
+    submid = pandas.DataFrame({'id': subm["id"]})
+    submission = pandas.concat([submid, pandas.DataFrame(preds, columns = categories)], axis=1)
     submission.to_csv('submission.csv', index=False)

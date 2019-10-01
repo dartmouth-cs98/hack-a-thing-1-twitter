@@ -8,6 +8,6 @@ Main program, calls other modules
 
 import dataset, model
 
-train, test, subm = dataset.read_dataset()
+train, test, subm, categories = dataset.read_dataset()
 
-model.model_train(train, test, subm)
+model.model_train(train, test, subm, categories)
