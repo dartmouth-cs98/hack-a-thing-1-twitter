@@ -39,7 +39,9 @@ def model_train(train, test, subm):
     # Getting and processing nltk stopwords corpus
     stopwords_nltk = nltk.corpus.stopwords.words('english')
 
-    stopwords_processed = [tokenize(i) for i in stopwords_nltk]
+    #stopwords_processed = [tokenize(i) for i in stopwords_nltk]
+
+
     #ngrams = choose which n-grams to create
     #        because this is naive bayes, only looking at single words
     #use_idf = use inverse-doc-frequency weighting
@@ -65,9 +67,12 @@ def model_train(train, test, subm):
 
     trn_term_doc, test_term_doc
     print("\nLearning Naive Bayes result: term-doc-matrix\n")
-    print(trn_term_doc)
-    print("Learning Naive Bayes result: model \n\n")
-    print(test_term_doc)
+    #The tuple represents: (document_id, token_id)
+    #The value following the tuple represents the tf-idf score of a given token in a given document
+    print(trn_term_doc[100])
+    print("First 100 feature names:\n")
+    print(vec.get_feature_names()[100])
+
 
     x = trn_term_doc
     test_x = test_term_doc
