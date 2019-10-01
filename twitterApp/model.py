@@ -38,12 +38,15 @@ def model_train(train, test, subm, categories):
 
     n = train.shape[0]
 
-    # Getting and processing nltk stopwords corpus
+    #### Getting and processing nltk stopwords corpus
     stopwords_nltk = nltk.corpus.stopwords.words('english')
-
     #stopwords_processed = [tokenize(i) for i in stopwords_nltk]
 
+    #### Create TF-IDF matrix
+    ## This gives better priors fr BAyes feature equation, not sure why though.
+    ## This create an inverse term-doc matrix with frquency of a word in the corpus.
 
+    ##Using TfidVectorizer
     #ngrams = choose which n-grams to create
     #        because this is naive bayes, only looking at single words
     #use_idf = use inverse-doc-frequency weighting
@@ -82,7 +85,7 @@ def model_train(train, test, subm, categories):
     # Return an array, preds, of the following shape filled with zeros
     preds = numpy.zeros((len(test), len(categories)))
 
-    # Goal?
+    # Train the model on each category with priors from TD-IDF and others
     #i is the index of the category, while j is the category itself
     for i, j in enumerate(categories):
         print('fit', j)
