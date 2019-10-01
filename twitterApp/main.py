@@ -10,4 +10,4 @@ import dataset, model
 
 train, test, subm = dataset.read_dataset()
 
-model.model_train(train)
+model.model_train(train, test, subm)

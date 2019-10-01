@@ -3,16 +3,13 @@
 import pandas, numpy, nltk
 from sklearn.linear_model import LogisticRegression
 from sklearn.feature_extraction.text import CountVectorizer, TfidfVectorizer
+nltk.download('stopwords')
+
 
 #################### Building the Model #######################
 
 import re, string
 
-
-#According to tutorial, must fill out empty comments or thing complains
-COMMENT = 'comment_text'
-train[COMMENT].fillna("unknown", inplace=True)
-test[COMMENT].fillna("unknown", inplace=True)
 
 #Tokenizing function
 re_tok = re.compile(f'([{string.punctuation}“”¨«»®´·º½¾¿¡§£₤‘’])')
@@ -31,11 +28,18 @@ def get_mdl(y):
     return m.fit(x_nb, y), r
 
 
-def model_train(train):
+def model_train(train, test, subm):
+    #According to tutorial, must fill out empty comments or thing complains
+    COMMENT = 'comment_text'
+    train[COMMENT].fillna("unknown", inplace=True)
+    test[COMMENT].fillna("unknown", inplace=True)
+
     n = train.shape[0]
 
+    # Getting and processing nltk stopwords corpus
     stopwords_nltk = nltk.corpus.stopwords.words('english')
 
+    stopwords_processed = [tokenize(i) for i in stopwords_nltk]
     #ngrams = choose which n-grams to create
     #        because this is naive bayes, only looking at single words
     #use_idf = use inverse-doc-frequency weighting
@@ -58,11 +62,16 @@ def model_train(train):
     trn_term_doc = vec.fit_transform(train[COMMENT])
     test_term_doc = vec.transform(test[COMMENT])
 
-    print("Learning Naive Bayes result: term-doc-matrix then model")
+
     trn_term_doc, test_term_doc
+    print("\nLearning Naive Bayes result: term-doc-matrix\n")
+    print(trn_term_doc)
+    print("Learning Naive Bayes result: model \n\n")
+    print(test_term_doc)
 
     x = trn_term_doc
     test_x = test_term_doc
+
 
     preds = np.zeros((len(test), len(label_cols)))
 
