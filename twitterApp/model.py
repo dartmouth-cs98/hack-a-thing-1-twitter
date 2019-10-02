@@ -85,15 +85,27 @@ def model_train(train, test, subm, categories):
     # Return an array, preds, of the following shape filled with zeros
     preds = numpy.zeros((len(test), len(categories)))
 
+    ##Store m,r with categories
+    cat_info = []
+
     # Train the model on each category with priors from TD-IDF and others
     #i is the index of the category, while j is the category itself
     for i, j in enumerate(categories):
         print('fit', j)
-        #get the hyperplane
+        #get the hyperplane?
         m,r = get_mdl(train[j],x)
-        #fill in predicate list
+        cat_info.append((m,r))
+    return cat_info, test_x
+
+
+def model_read_input(test_x, categories, cat_info):
+    for i, j in enumerate(categories):
+        m = cat_info[i][0]
+        r = cat_info[i][1]
+        #fill in predicate list: Outputs ID, probability of being in each class
+        #(N,k) -> The probability of N entries belonging to any of the k class
         preds[:,i] = m.predict_proba(test_x.multiply(r))[:,1]
 
-    submid = pandas.DataFrame({'id': subm["id"]})
-    submission = pandas.concat([submid, pandas.DataFrame(preds, columns = categories)], axis=1)
-    submission.to_csv('submission.csv', index=False)
+        submid = pandas.DataFrame({'id': subm["id"]})
+        submission = pandas.concat([submid, pandas.DataFrame(preds, columns = categories)], axis=1)
+        submission.to_csv('submission.csv', index=False)

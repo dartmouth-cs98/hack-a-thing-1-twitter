@@ -10,4 +10,5 @@ import dataset, model
 
 train, test, subm, categories = dataset.read_dataset()
 
-model.model_train(train, test, subm, categories)
+cat_info, test_x = model.model_train(train, test, subm, categories)
+model.model_read_input(test_x, categories, cat_info)
