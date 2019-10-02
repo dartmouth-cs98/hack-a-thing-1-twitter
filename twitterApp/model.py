@@ -82,9 +82,6 @@ def model_train(train, test, subm, categories):
     x = trn_term_doc
     test_x = test_term_doc
 
-    # Return an array, preds, of the following shape filled with zeros
-    preds = numpy.zeros((len(test), len(categories)))
-
     ##Store m,r with categories
     cat_info = []
 
@@ -98,7 +95,10 @@ def model_train(train, test, subm, categories):
     return cat_info, test_x
 
 
-def model_read_input(test_x, categories, cat_info):
+def model_read_input(test,test_x, categories, cat_info, subm):
+    # Return an array, preds, of the following shape filled with zeros
+    preds = numpy.zeros((len(test), len(categories)))
+
     for i, j in enumerate(categories):
         m = cat_info[i][0]
         r = cat_info[i][1]
